@@ -1,102 +1,170 @@
-var BookIt = BookIt || {};
-
-// Begin boilerplate code generated with Cordova project.
-
-var app = {
-    // Application Constructor
-    initialize: function () {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function () {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function () {
-        app.receivedEvent('deviceready');        
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function (id) { 
-        //var options = { timeout: 30000 };
-        //http://docs.phonegap.com/en/edge/cordova_geolocation_geolocation.md.html
-        var options = { enableHighAccuracy: true };
-        watchID = navigator.geolocation.watchPosition(this.geoLocationOnSuccess, this.geoLocationOnError, options);
-       // app.checkLocale();
-    },
-    
-    // onSuccess Geolocation
-    geoLocationOnSuccess : function(position){
-         var element = document.getElementById('geolocation');
-        element.innerHTML = "";    
-        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
-                            'Longitude: ' + position.coords.longitude     + '<br />' +
-                            '<hr />'      + element.innerHTML;
-    },
-    
-    // onError Callback receives a PositionError object
-    geoLocationOnError : function(error){
-         alert('code: '    + error.code    + '\n' +
-                  'message: ' + error.message + '\n');
-    },
-    
-    checkLocale : function() {
-      navigator.globalization.getLocaleName(
-        function (locale) {alert('locale: ' + locale.value + '\n');},
-        function () {alert('Error getting locale\n');}
-      );
-    }
-    
-};
-
-
-app.initialize();
-
-// End boilerplate code.
-
-$(document).on("mobileinit", function (event, ui) {
-    $.mobile.defaultPageTransition = "slide";
+$(document).ready(function(){
+    //set Language
+   $(".selAppLang a").on('click',function(e){
+       var currentSelectedLanType = localStorage.getItem("ngStorage-defLanguageType");
+       if(currentSelectedLanType != ""){
+           var languageName = $(this).attr("data-selAppLang");
+           app.getAppLanguage(languageName);           
+       }
+   }); 
+   
+   $("#btn-logout-yes").on('click',function(e){
+	   app.closeApplication();	   
+   });
+   
 });
 
-app.signupController = new BookIt.SignUpController();
-app.singinController = new BookIt.SignInController();
-
-$(document).on("pagecontainerbeforeshow", function (event, ui) {
-    if (typeof ui.toPage == "object") {
-        switch (ui.toPage.attr("id")) {
-            case "page-signup":
-                // Reset the signup form.
-                app.signupController.resetSignUpForm();
-                break;
+function updateApplicationLanguage(){
+        var readLanguageJson = JSON.parse(localStorage.getItem("ngStorage-defLanguageData"));
+        $.each(readLanguageJson,function(key,value){
+            if(key.toLowerCase().indexOf("wcf-") >= 0){
+                updateWelcomePage(key,value);
+            }
+            else if(key.toLowerCase().indexOf("suf-") >= 0){
+                updateSignUpPage(key,value);
+            }
+            else if(key.toLowerCase().indexOf("sif-") >= 0){
+                updateSignInPage(key,value);
+            }
+            else if(key.toLowerCase().indexOf("susf-") >= 0){
+                updateSignupSucceededPage(key,value);
+            }
+            else if(key.toLowerCase().indexOf("db-") >= 0){
+                updateDashboardPage(key,value);
+            }
                 
-            case "page-signin":
-                app.singinController.resetSignInForm();
+        });
+    }
+    
+    function updateWelcomePage(key,value){
+        switch(key){
+            case BookIt.Settings.language.wcf_lblPageHeading:
+               $("#wcf_lblPageHeading").html(value);
+                break;
+            case BookIt.Settings.language.wcf_lblPageContentHeading: 
+            $("#wcf_lblPageContentHeading").html(value);
+                break;
+            case BookIt.Settings.language.wcf_lblselectLanguage:
+                $("#wcf_lblselectLanguage").html(value);
+                break;
+            case BookIt.Settings.language.wcf_lblSignIn:
+                $("#wcf_lblSignIn").html(value);
+                break;
+			case BookIt.Settings.language.wcf_lblSignUp:
+                $("#wcf_lblSignUp").html(value);
+                break;
+			case BookIt.Settings.language.wcf_btnSignIn:
+                $("#wcf_btnSignIn").html(value);
+                break;
+			case BookIt.Settings.language.wcf_btnSignUp:
+                $("#wcf_btnSignUp").html(value);
+                break;		
+            case BookIt.Settings.language.wcf_lblselectLanguage:
+                $("#wcf_lblselectLanguage").html(value);
+                break;
+            case BookIt.Settings.language.wcf_lblselectLanguage:
+                $("#wcf_lblselectLanguage").html(value);
+                break;
+            case BookIt.Settings.language.wcf_lblselectLanguage:
+                $("#wcf_lblselectLanguage").html(value);
+                break;
+			case BookIt.Settings.language.wcf_footerText:
+                $("#wcf_footerText").html(value);
+                break;	
+            default:
+                break;
+            }
+        }
+                
+    function updateSignUpPage(key,value){
+              switch(key){
+                case BookIt.Settings.language.suf_lblPageHeading:
+					$("#suf_lblPageHeading").html(value);
+					break;
+                case BookIt.Settings.language.suf_lblPageContentHeading:
+					$("#suf_lblPageContentHeading").html(value);
+					break;
+                case BookIt.Settings.language.suf_lblFirstname:
+					$("#suf_lblFirstname").html(value);
+					break;
+				case BookIt.Settings.language.suf_lblLastname:
+					$("#suf_lblLastname").html(value);
+					break;
+				case BookIt.Settings.language.suf_lblUserName:
+					$("#suf_lblUserName").html(value);
+					break;					
+				case BookIt.Settings.language.suf_lblpassword:
+					$("#suf_lblpassword").html(value);
+					break;
+				case BookIt.Settings.language.suf_lblConfirmPassword:
+					$("#suf_lblConfirmPassword").html(value);
+					break;
+				case BookIt.Settings.language.suf_btnSubmit:
+					$("#suf_btnSubmit").html(value);
+					break;
+				case BookIt.Settings.language.suf_footerText:
+					$("#suf_footerText").html(value);
+					break;
+				default:
+					break;
+            }
+        }
+    
+    function updateSignInPage(key,value){
+		 switch(key){
+            case BookIt.Settings.language.sif_lblPageHeading:
+               $("#sif_lblPageHeading").html(value);
+                break;
+            case BookIt.Settings.language.wcf_lblPageContentHeading: 
+            $("#wcf_lblPageContentHeading").html(value);
+                break;
+            case BookIt.Settings.language.sif_lblUserName:
+                $("#sif_lblUserName").html(value);
+                break;
+            case BookIt.Settings.language.sif_lblPassword:
+                $("#sif_lblPassword").html(value);
+                break;
+			case BookIt.Settings.language.sif_lblRememberMe:
+                $("#sif_lblRememberMe").html(value);
+                break;
+			case BookIt.Settings.language.sif_lblCantAccessAccount:
+                $("#sif_lblCantAccessAccount").html(value);
+                break;
+			case BookIt.Settings.language.sif_btnsubmit:
+                $("#sif_btnsubmit").html(value);
+                break;		
+            case BookIt.Settings.language.sif_footerText:
+                $("#sif_footerText").html(value);
+                break;
+            default:
+                break;
+            }
+        }
+    
+    function updateSignupSucceededPage(key,value){
+		switch(key){
+            case BookIt.Settings.language.susf_lblSuccessMessage:
+               $("#susf_lblSuccessMessage").html(value);
+                break;
+            case BookIt.Settings.language.susf_lblPageContentHeading: 
+            $("#susf_lblPageContentHeading").html(value);
+                break;
+            case BookIt.Settings.language.susf_lblPageHeading:
+                $("#susf_lblPageHeading").html(value);
+                break;
+            case BookIt.Settings.language.susf_btnSubmit:
+                $("#susf_btnSubmit").html(value);
+                break;
+			case BookIt.Settings.language.susf_footerText:
+                $("#susf_footerText").html(value);
+                break;
+			default:
                 break;
         }
+        
     }
-});
-
-$(document).delegate("#page-signup", "pagebeforecreate", function () {
-
-    app.signupController.init();
-
-    app.signupController.$btnSubmit.off("tap").on("tap", function () {
-        app.signupController.onSignUpCommand();
-    });
-
-});
-
-$(document).delegate("#page-signin", "pagebeforecreate", function () {
-
-    app.singinController.init();
-
-    app.singinController.$btnSubmit.off("tap").on("tap", function () {
-        app.singinController.onSignInCommand();
-    });
-
-});
+    
+    function updateDashboardPage(key,value){
+        
+    }
+// End boilerplate code.

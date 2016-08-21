@@ -30,7 +30,7 @@
             <p id="geolocation">Watching geolocation...</p>
         </div><!-- /header -->
         <div role="main" class="ui-content">
-            <h2 class="mc-text-center" id="wcf_lblPageConentHeading">Welcome!</h2>
+            <h2 class="mc-text-center" id="wcf_lblPageContentHeading">Welcome!</h2>
             <p class="mc-top-margin-1-5"><b id="wcf_lblSignIn">Existing Users</b></p>
             <a href="#page-signin" class="ui-btn ui-btn-b ui-corner-all" id="wcf_btnSignIn">Sign In</a>
             <p class="mc-top-margin-1-5"><b id="wcf_lblSignUp">Don't have an account?</b></p>
@@ -42,27 +42,27 @@
                  <a href="#" class="" id="anchlanMarathi" data-selAppLang = "Marathi">Marathi</a>
             </div>
         </div><!-- /content -->
-      <div data-role="footer">
-                  <small>© Copyright 2016, Accenture Hackathon</small>
+      <div data-role="footer" >
+          <small id="wcf_footerText">© Copyright 2016, Accenture Hackathon</small>
       </div>
     </div><!-- /page -->
     <div data-role="page" id="page-signin">
         <div data-role="header" data-theme="c" data-position="fixed">
             <a href="#page-index" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
-            <h1>Kisan Krishi Bazaar</h1>
+            <h1 id="sif_lblPageHeading">Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
-            <h3>Sign In</h3>
-            <label for="txt-email">User Name</label>
+            <h3 id="sif_lblPageContentHeading">Sign In</h3>
+            <label for="txt-email" id="sif_lblUserName">User Name</label>
             <input type="text" name="txt-UserName" id="txt-UserName" value="">
-            <label for="txt-password">Password</label>
+            <label for="txt-password" id="sif_lblPassword">Password</label>
             <input type="password" name="txt-password" id="txt-password" value="">
             <fieldset data-role="controlgroup">
                 <input type="checkbox" name="chck-rememberme" id="chck-rememberme">
-                <label for="chck-rememberme">Remember me</label>
+                <label for="chck-rememberme" id="sif_lblRememberMe">Remember me</label>
             </fieldset>
-            <a href="#dlg-invalid-credentials" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Submit</a>
-            <p class="mc-top-margin-1-5"><a href="begin-password-reset.html">Can't access your account?</a></p>
+            <a href="#dlg-invalid-credentials" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" id="sif_btnsubmit">Submit</a>
+            <p class="mc-top-margin-1-5"><a href="begin-password-reset.html" id="sif_lblCantAccessAccount">Can't access your account?</a></p>
             <div data-role="popup" id="dlg-invalid-credentials" data-dismissible="false" style="max-width:400px;">
                 <div role="main" class="ui-content">
                     <h3 class="mc-text-danger">Login Failed</h3>
@@ -72,29 +72,29 @@
             </div>
         </div><!-- /content -->
         <div data-role="footer">
-                  <small>© Copyright 2016, Accenture Hackathon</small>
+                  <small id="sif_footerText">© Copyright 2016, Accenture Hackathon</small>
             </div>
     </div><!-- /page -->
     <div data-role="page" id="page-signup">
         <div class="bi-header" data-role="header" data-theme="c" data-position="fixed">
             <a href="#page-index" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
-            <h1 id="suf-lbl-pageHeading"></h1>
+            <h1 id="suf_lblPageHeading"></h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
-            <h3 id="suf-lbl-PageContentHeading"></h3>
+            <h3 id="suf_lblPageContentHeading"></h3>
             <div id="ctn-err" class="bi-invisible"></div>
-            <label for="txt-first-name" id="suf-lbl-firstName"></label>
+            <label for="txt-first-name" id="suf_lblFirstname"></label>
             <input type="text" name="txt-first-name" id="txt-first-name" value="">
-            <label for="txt-last-name" id="lblLastName"></label>
+            <label for="txt-last-name" id="suf_lblLastname"></label>
             <input type="text" name="txt-last-name" id="txt-last-name" value="">
-            <label for="txt-user-name" id="lbluserName"></label>
+            <label for="txt-user-name" id="suf_lblUserName"></label>
             <input type="text" name="txt-user-name" id="txt-user-name" value="">
-            <label for="txt-password" id="lblpassword"></label>
+            <label for="txt-password" id="suf_lblpassword"></label>
             <input type="password" name="txt-password" id="txt-password" value="">
-            <label for="txt-password-confirm" id="lblconfirmPassword"></label>
+            <label for="txt-password-confirm" id="suf_lblConfirmPassword"></label>
             <input type="password" name="txt-password-confirm" id="txt-password-confirm" value="">
             <!--<a href="#dlg-sign-up-sent" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Submit</a>-->
-            <button id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" ></button>
+            <button id="suf_btnSubmit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" ></button>
             <div data-role="popup" id="dlg-sign-up-sent" data-dismissible="false" style="max-width:400px;">
                 <div data-role="header">
                     <h1>Almost done...</h1>
@@ -103,41 +103,55 @@
                     <h3>Confirm Your Email Address</h3>
                     <p>We sent you an email with instructions on how to confirm your email address. Please check your inbox and follow the instructions in the email.</p>
                     <div class="mc-text-center"><a href="sign-in.html" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
-
                 </div>
-                <div data-role="footer">
-                  <small>© Copyright 2016, Accenture Hackathon</small>
-            </div>
             </div>
         </div><!-- /content -->
+		  <div data-role="footer">
+                  <small id="suf_footerText">© Copyright 2016, Accenture Hackathon</small>
+            </div>
     </div><!-- /page -->
     <div data-role="page" id="page-signup-succeeded">
         <div data-role="header" data-theme="c">
-            <h1>Kisan Krishi Bazaar</h1>
+            <h1 id="susf_lblPageHeading">Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
-            <h2 class="mc-text-center">Registration Succeeded</h2>
-            <p class="mc-top-margin-1-5">Congratulations!  You are now registered with Kisan Krishi Bazaar.</p>
-            <a href="#page-dashboard" class="ui-btn ui-btn-b ui-corner-all">Go to Dashboard</a>
-            
+            <h2 class="mc-text-center" id="susf_lblPageContentHeading">Registration Succeeded</h2>
+            <p class="mc-top-margin-1-5" id="susf_lblSuccessMessage">Congratulations!  You are now registered with Kisan Krishi Bazaar.</p>
+            <a href="#page-dashboard" class="ui-btn ui-btn-b ui-corner-all" id="susf_btnSubmit">Go to Dashboard</a>
         </div><!-- /content -->
          <div data-role="footer">
-                  <small>© Copyright 2016, Accenture Hackathon</small>
+                  <small id="susf_footerText">© Copyright 2016, Accenture Hackathon</small>
             </div>
     </div><!-- /page -->
     
-    <div data-role="page" id="page-dashboard">
+	<div data-role="page" id="page-dashboard">
          <div data-role="panel" id="mypanel" data-display="overlay" data-position="left">
                 <!-- panel content goes here -->
-                <a href="#mypanel" data-rel="close">Close panel</a>
+               <ul data-role="listview">
+					<li><a href="#dlg-logOut-popup" data-rel="popup" data-position-to="origin">Log Out</a></li>					
+					<li><a href="#page-orderHistory" data-rel="close" data-icon="arrow-r">My Account</a></li>
+				</ul>
+				 <div data-role="popup" id="dlg-logOut-popup" data-dismissible="false">
+					<div role="main" class="ui-content" style="width:200px;">
+						<h3 class="mc-text-danger">Are you sure?</h3>
+						<fieldset class="ui-grid-a">
+						  <div class="ui-block-a">
+							<button id="btn-logout-yes" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" value=""  data-theme="a">Yes</button>
+						  </div>
+						  <div class="ui-block-b">	
+							<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">No</a>
+                          </div>							
+						</fieldset>
+					</div>
+				</div>
             </div><!-- /panel -->
         <div data-role="header" data-theme="c">
             <h1>Kisan Krishi Bazaar</h1>
-            <a href="#mypanel" data-icon="home" data-iconpos="notext" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars">Log out</a>
+            <a href="#mypanel"  class="jqm-navmenu-link ui-nodisc-icon ui-alt-icon ui-btn-left ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Log out</a>
         </div><!-- /header -->
         <div role="main" class="ui-content" style="background:url('img/dashboard.jpg');min-height:inherit">
             <h2 class="mc-text-center">Dashboard</h2>
-            <div class="ui-grid-a">
+            <div class="ui-grid-solo">
                 <div class="ui-block-a">
                     <a href="#commodity-price" data-rel="popup" data-position-to="window" class="ui-shadow ui-btn ui-corner-all" data-transition="pop">market Price</a>
                     <div data-role="popup" id="commodity-price" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:300px;">
@@ -174,35 +188,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui-block-b">
-                    <a href="#order-history" data-rel="popup" data-position-to="window" class="ui-shadow ui-btn ui-corner-all" data-transition="pop">Order History</a>
-                </div>
-                <div class="ui-block-a">
-                    <a href="#negotiate-price" data-rel="popup" data-position-to="window" class="ui-shadow ui-btn ui-corner-all" data-transition="pop">Negotiate Price</a>
-                </div>
-                <div class="ui-block-b">
-                    <a href="#commodity-price" data-rel="popup" data-position-to="window" class="ui-shadow ui-btn ui-corner-all" data-transition="pop">market Price</a>
-                </div>
             </div><!-- /grid-c -->
             <div class="ui-grid-solo">
                 <div class="ui-block-a"><a href="#page-uploadproducts"  class="ui-shadow ui-btn ui-corner-all">Enter your Goods</a></div>
             </div>
-        </div><!-- /content -->
+			<div class="ui-grid-solo">
+                <div class="ui-block-a"> <a href="#page-orderHistory" class="ui-shadow ui-btn ui-corner-all">Order History</a></div>
+            </div>
+			<div class="ui-grid-solo">
+                <div class="ui-block-a"><a href="#page-negotiateHistory" class="ui-shadow ui-btn ui-corner-all">Negotiate Price</a></div>
+            </div>
+        
+		
+		</div><!-- /content -->
+		
         <div data-role="footer">
                   <small>© Copyright 2016, Accenture Hackathon</small>
             </div>
     </div><!-- /page -->
-    
     <div data-role="page" id="page-uploadproducts">
         <div data-role="header" data-theme="c" data-position="fixed">
             <a href="#page-dashboard" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
             <h1>Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
-            <form method="post" action="#page-orderHistory" data-ajax="false">
-				<label for="select-product">Product : <span>*</span></label>
-				<select name="select-product" id="select-product" data-native-menu="false">
-					<option value="choose-one" data-placeholder="true">select  product...</option>
+				<div id="product-ctn-err" class="bi-invisible"></div>
+            	<label for="select-product">Product : <span>*</span></label>
+				<select name="select-product" id="select-product" data-native-menu="false" class="required">
+					<option value="0" data-placeholder="true">select  product...</option>
 					<option value="1">The 1st Option</option>
 					<option value="2">The 2nd Option</option>
 					<option value="3">The 3rd Option</option>
@@ -211,18 +224,28 @@
 				<label for="lbl-estimated-price">Estimated price: </label>
 				<input type="text" name="lbl-estimated-price" id="lbl-estimated-price" value="" placeholder="estimated price" readonly></input> 
 				<label for="select-quantity">Quantity : <span>*</span></label>
-				<select name="select-quantity" id="select-quantity" data-native-menu="false">
-					<option value="choose-one" data-placeholder="true">select  quantity...</option>
+				<select name="select-quantity" id="select-quantity" data-native-menu="false" class="required">
+					<option value="0" data-placeholder="true">select  quantity...</option>
 					<option value="1">100</option>
 					<option value="2">200</option>
 					<option value="3">300</option>
 					<option value="4">400</option>
 				</select>
-				<label for="lbl-quote-price">Quote price: </label>
-				<input type="text" name="lbl-quote-price" id="lbl-quote-price" value="" placeholder="Quote price"></input> 
-				<input type="submit" data-inline="true" value="Submit" data-theme="b">
-				<input type="button" data-inline="true" value="cancel" data-theme="a">				
-			</form>
+				<label for="txt-quote-price">Quote price: </label>
+				<input type="text" name="txt-quote-price" id="txt-quote-price" value="" placeholder="Quote price"></input> 
+				<div class="ui-block-a">
+					<button id="btn-uploadproductsubmit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" value="" >Submit</button>
+				</div>
+				<div class="ui-block-b">
+				<a href="#page-dashboard"  class="ui-shadow ui-btn ui-corner-all mc-top-margin-1-5">Close</a></div>
+				
+			<div data-role="popup" id="dlg-uploadproductsubmit-success" data-dismissible="false" style="max-width:400px;">
+                <div role="main" class="ui-content">
+                    <h3 class="mc-text-danger">Congratulations!</h3>
+                    <p>Product uploaded successfully!</p>
+                    <div class="mc-text-center"><a href="#page-dashboard" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+                </div>
+            </div>
         </div><!-- /content -->
       <div data-role="footer">
                   <small>© Copyright 2016, Accenture Hackathon</small>
@@ -256,12 +279,7 @@
 				  <td>100</td>
 				  <td>74</td>
 				  <td>
-				  <fieldset data-role="controlgroup" data-type="horizontal">
-				   <select name="select1-custom-11" id="select1-custom-11" data-native-menu="false">
-						<option value="#">Complete</option>
-						<option value="#">In progress</option>						
-					</select>
-				  </fieldset>	
+				   <input type="checkbox" data-role="flipswitch" name="flip-checkbox-1" id="flip-checkbox-1" data-on-text="In Progress" data-off-text="Complete" data-wrapper-class="custom-size-flipswitch">			  
 				  </td>
 				</tr>
 				<tr>
@@ -271,12 +289,66 @@
 				  <td>100</td>
 				  <td>74</td>
 				  <td>
-				   <fieldset data-role="controlgroup" data-type="horizontal">
-				   <select name="select2-custom-11" id="select2-custom-11" data-native-menu="false">
-						<option value="#">Complete</option>
-						<option value="#">In progress</option>						
+				   <input type="checkbox" data-role="flipswitch" name="flip-checkbox-2" id="flip-checkbox-2" data-on-text="In Progress" data-off-text="Complete" data-wrapper-class="custom-size-flipswitch">			  	
+				  </td>
+				</tr>
+			  </tbody>
+			</table>
+			<div class="ui-grid-solo">
+                <div class="ui-block-a"><a href="#page-dashboard"  class="ui-shadow ui-btn ui-corner-all">Close</a></div>
+            </div>
+        </div><!-- /content -->
+      <div data-role="footer">
+                  <small>© Copyright 2016, Accenture Hackathon</small>
+      </div>
+    </div><!-- /page -->
+    
+    
+	<div data-role="page" id="page-negotiateHistory">
+        <div data-role="header" data-theme="c" data-position="fixed">
+            <a href="#page-dashboard" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+            <h1>Kisan Krishi Bazaar</h1>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+		  <h3>Negotiate History</h3>
+          <table data-role="table" id="orderHistoryTable" data-mode="reflow" class="movie-list">
+			  <thead>
+				<tr>
+				  <th>Id</th>
+				  <th data-priority="2">Submitted Date</th>
+				  <th data-priority="3">Product</th>
+				  <th data-priority="4">Estimated Price</th>
+				  <th data-priority="3">Quoted Price</th>
+				  <th data-priority="3">Negotiate Price</th>
+				  <th data-priority="1">Status</th>				  
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <th>1</th>
+				  <td>21-08-2018</td>
+				  <td class="title">test</td>
+				  <td>100</td>
+				  <td>74</td>
+				  <td>70</td>
+				  <td>
+				    <select name="flip-1" id="flip-1" data-role="flipswitch">
+						<option value="accept">accept</option>
+						<option value="reject">reject</option>
 					</select>
-				  </fieldset>	
+				  </td>
+				</tr>
+				<tr>
+				  <th>2</th>
+				  <td>21-08-2018</td>
+				  <td class="title">test</td>
+				  <td>100</td>
+				  <td>74</td>
+				  <td>
+				    <select name="flip-2" id="flip-2" data-role="flipswitch">
+						<option value="accept">accept</option>
+						<option value="reject">reject</option>
+					</select>	
 				  </td>
 				</tr>
 			  </tbody>
@@ -295,15 +367,17 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script src="lib/fastclick/fastclick.js"></script>
     <script src="lib/jquery/jquery-2.1.1.js"></script>
-    <script src="js/api-messages.js"></script>
+    <script src="lib/jqm/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="js/api-messages.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/signup-controller.js"></script>
     <script src="js/session.js"></script>
     <script src="js/signin-controller.js"></script>
     <script src="js/signupsucceeded-controller.js"></script>
     <script src="js/dashboard-controller.js"></script>
+	<script src="js/product-controller.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script src="lib/jqm/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    
 
 </html>

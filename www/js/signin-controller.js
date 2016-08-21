@@ -1,4 +1,4 @@
-var BookIt = BookIt || {};
+	var BookIt = BookIt || {};
 
 BookIt.SignInController = function () {
 
@@ -66,26 +66,26 @@ BookIt.SignInController.prototype.onSignInCommand = function () {
     
     $.mobile.loading("show");
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: BookIt.Settings.signInUrl,
-        data: "user=" + userName + "&pwd=" + password,
+        data: "email=" + userName + "&password=" + password,
         success: function (resp) {
             $.mobile.loading("hide");
-            //if (resp.success === true) {
+            if (resp.success === true) {
                 // Create session. 
                 var today = new Date();
                 var expirationDate = new Date();
                 expirationDate.setTime(today.getTime() + BookIt.Settings.sessionTimeoutInMSec);
-              /*  BookIt.Session.getInstance().set({
+                BookIt.Session.getInstance().set({
                     userProfileModel: resp.extras.userProfileModel,
                     sessionId: resp.extras.sessionId,
                     expirationDate: expirationDate,
                     keepSignedIn:me.$chkKeepSignedIn.is(":checked")
-                });*/
+                });
                 // Go to main menu.
                 $.mobile.navigate(me.mainMenuPageId);
                 return;
-            //} else {
+            } else {
                 if (resp.extras.msg) {
                     switch (resp.extras.msg) {
                         case BookIt.ApiMessages.DB_ERROR:
@@ -102,7 +102,7 @@ BookIt.SignInController.prototype.onSignInCommand = function () {
                             break;
                     }
                 }
-           // }
+            }
         },
         error: function (e) {
             $.mobile.loading("hide");

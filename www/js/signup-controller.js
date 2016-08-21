@@ -7,18 +7,19 @@ BookIt.SignUpController = function () {
     this.$ctnErr = null;
     this.$txtFirstName = null;
     this.$txtLastName = null;
-    this.$txtEmailAddress = null;
+    this.$txtUserName = null;
     this.$txtPassword = null;
     this.$txtPasswordConfirm = null;
+    this.$lblPageHeading = null;
 };
 
 BookIt.SignUpController.prototype.init = function () {
     this.$signUpPage = $("#page-signup");
-    this.$btnSubmit = $("#btn-submit", this.$signUpPage);
+    this.$btnSubmit = $("#suf_btnSubmit", this.$signUpPage);
     this.$ctnErr = $("#ctn-err", this.$signUpPage);
     this.$txtFirstName = $("#txt-first-name", this.$signUpPage);
     this.$txtLastName = $("#txt-last-name", this.$signUpPage);
-    this.$txtEmailAddress = $("#txt-email-address", this.$signUpPage);
+    this.$txtUserName = $("#txt-user-name", this.$signUpPage);
     this.$txtPassword = $("#txt-password", this.$signUpPage);
     this.$txtPasswordConfirm = $("#txt-password-confirm", this.$signUpPage);
 };
@@ -32,9 +33,17 @@ BookIt.SignUpController.prototype.passwordIsComplex = function (password) {
     return true;
 };
 
-BookIt.SignUpController.prototype.emailAddressIsValid = function (email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+BookIt.SignUpController.prototype.userNameIsValid = function (userName) {
+    var url = BookIt.Settings.validateUserNameUrl;
+	return true;
+    $.post(url,{username: userName}, function(data){
+    if(data.exists){
+        return false;//user already exist . try new username
+    }else{
+        return true; //proceed with this UserName;
+    }
+ }, 'JSON');
+    
 };
 
 BookIt.SignUpController.prototype.resetSignUpForm = function () {
@@ -46,15 +55,18 @@ BookIt.SignUpController.prototype.resetSignUpForm = function () {
     this.$ctnErr.removeClass().addClass(invisibleStyle);
     this.$txtFirstName.removeClass(invalidInputStyle);
     this.$txtLastName.removeClass(invalidInputStyle);
-    this.$txtEmailAddress.removeClass(invalidInputStyle);
+    this.$txtUserName.removeClass(invalidInputStyle);
     this.$txtPassword.removeClass(invalidInputStyle);
     this.$txtPasswordConfirm.removeClass(invalidInputStyle);
 
     this.$txtFirstName.val("");
     this.$txtLastName.val("");
-    this.$txtEmailAddress.val("");
+    this.$txtUserName.val("");
     this.$txtPassword.val("");
     this.$txtPasswordConfirm.val("");
+    
+    
+    
 
 };
 
@@ -63,7 +75,7 @@ BookIt.SignUpController.prototype.onSignUpCommand = function () {
     var me = this,
         firstName = me.$txtFirstName.val().trim(),
         lastName = me.$txtLastName.val().trim(),
-        emailAddress = me.$txtEmailAddress.val().trim(),
+        userName = me.$txtUserName.val().trim(),
         password = me.$txtPassword.val().trim(),
         passwordConfirm = me.$txtPasswordConfirm.val().trim(),
         invalidInput = false,
@@ -74,7 +86,7 @@ BookIt.SignUpController.prototype.onSignUpCommand = function () {
     me.$ctnErr.removeClass().addClass(invisibleStyle);
     me.$txtFirstName.removeClass(invalidInputStyle);
     me.$txtLastName.removeClass(invalidInputStyle);
-    me.$txtEmailAddress.removeClass(invalidInputStyle);
+    me.$txtUserName.removeClass(invalidInputStyle);
     me.$txtPassword.removeClass(invalidInputStyle);
     me.$txtPasswordConfirm.removeClass(invalidInputStyle);
 
@@ -87,8 +99,8 @@ BookIt.SignUpController.prototype.onSignUpCommand = function () {
         me.$txtLastName.addClass(invalidInputStyle);
         invalidInput = true;
     }
-    if (emailAddress.length === 0) {
-        me.$txtEmailAddress.addClass(invalidInputStyle);
+    if (userName.length === 0) {
+        me.$txtUserName.addClass(invalidInputStyle);
         invalidInput = true;
     }
     if (password.length === 0) {
@@ -107,10 +119,10 @@ BookIt.SignUpController.prototype.onSignUpCommand = function () {
         return;
     }
 
-    if (!me.emailAddressIsValid(emailAddress)) {
-        me.$ctnErr.html("<p>Please enter a valid email address.</p>");
+    if (!me.userNameIsValid(userName)) {
+        me.$ctnErr.html("<p>user name already exist.</p>");
         me.$ctnErr.addClass("bi-ctn-err").slideDown();
-        me.$txtEmailAddress.addClass(invalidInputStyle);
+        me.$txtUserName.addClass(invalidInputStyle);
         return;
     }
 
@@ -130,11 +142,12 @@ BookIt.SignUpController.prototype.onSignUpCommand = function () {
         me.$txtPasswordConfirm.addClass(invalidInputStyle);
         return;
     }
-
+	$.mobile.navigate("#page-signup-succeeded");
+    return;
     $.ajax({
         type: 'POST',
         url: BookIt.Settings.signUpUrl,
-        data: "email=" + emailAddress + "&firstName=" + firstName + "&lastName=" + lastName + "&password=" + password + "&passwordConfirm=" + passwordConfirm,
+        data: "userName=" + userName + "&firstName=" + firstName + "&lastName=" + lastName + "&password=" + password + "&passwordConfirm=" + passwordConfirm + "&lat=" + currentlatitute + "&long=" + currentlongitude,
         success: function (resp) {
 
             if (resp.success === true) {
@@ -146,11 +159,11 @@ BookIt.SignUpController.prototype.onSignUpCommand = function () {
                         case BookIt.ApiMessages.DB_ERROR:
                         case BookIt.ApiMessages.COULD_NOT_CREATE_USER:
                             // TODO: Use a friendlier error message below.
-                            me.$ctnErr.html("<p>Oops! BookIt had a problem and could not register you.  Please try again in a few minutes.</p>");
+                            me.$ctnErr.html("<p>Oops! Sign up had a problem and could not register you.  Please try again in a few minutes.</p>");
                             me.$ctnErr.addClass("bi-ctn-err").slideDown();
                             break;
                         case BookIt.ApiMessages.EMAIL_ALREADY_EXISTS:
-                            me.$ctnErr.html("<p>The email address that you provided is already registered.</p>");
+                            me.$ctnErr.html("<p>The user name that you provided is already registered.</p>");
                             me.$ctnErr.addClass("bi-ctn-err").slideDown();
                             me.$txtEmailAddress.addClass(invalidInputStyle);
                             break;
