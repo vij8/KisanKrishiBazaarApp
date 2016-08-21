@@ -1,0 +1,45 @@
+{
+  "Commodity_Report": {
+    "Items": [
+      {
+        "Rank": "1",
+        "Market_Center": "Gujarat",
+        "Goods": "Cereals - Barley (Jau)",
+        "Arrivals": "5.1",
+        "Unit_of_Arrivals": "Tonnes",
+        "Origin": "NR",
+        "Variety": "Other",
+        "Minimum_Price": "1700",
+        "Maximum_Price": "1900",
+        "Modal_Price": "1800",
+        "Unit_of_Price": "Rs/Quintal"
+      },  
+	  {
+        "Rank": "2",
+        "Market_Center": "Gujarat",
+        "Goods": "Cereals - Barley (Jau)",
+        "Arrivals": "5.1",
+        "Unit_of_Arrivals": "Tonnes",
+        "Origin": "NR",
+        "Variety": "Other",
+        "Minimum_Price": "1700",
+        "Maximum_Price": "1900",
+        "Modal_Price": "1800",
+        "Unit_of_Price": "Rs/Quintal"
+      },  
+	  {
+        "Rank": "3",
+        "Market_Center": "Gujarat",
+        "Goods": "Cereals - Barley (Jau)",
+        "Arrivals": "5.1",
+        "Unit_of_Arrivals": "Tonnes",
+        "Origin": "NR",
+        "Variety": "Other",
+        "Minimum_Price": "1700",
+        "Maximum_Price": "1900",
+        "Modal_Price": "1800",
+        "Unit_of_Price": "Rs/Quintal"
+      }
+	]
+	}
+}	
