@@ -23,7 +23,7 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function (id) { 
         //https://github.com/apache/cordova-plugin-geolocation
-        navigator.geolocation.getCurrentPosition(geoLocationOnSuccess, geoLocationOnError);
+        //navigator.geolocation.getCurrentPosition(geoLocationOnSuccess, geoLocationOnError);
     },
             
     getAppLanguage : function(languageName){
@@ -56,19 +56,26 @@ var app = {
 		}
     },
     
-    getCommodity : function(){
-        var locCommodity = localStorage.getItem("ngStorage-commodity");
-        var locCommodityDate = localStorage.getItem("ngStorage-commodityDate")
-        var currentDate = new Date().toJSON().slice(0,10);
-        if(locCommodity == "" || locCommodityDate != currentDate)
+    getCommodity : function(languageName){
+		languageName = languageName == "" ? "english" : languageName; //set default lang English 
+		var ngStorage_commodity = "ngStorage-commodity-" + languageName;
+        var locCommodity = localStorage.getItem(ngStorage_commodity);
+        var locCommodityDate = localStorage.getItem("ngStorage-commodityDate");
+	    var currentDate = new Date().toJSON().slice(0,10);
+		if((locCommodity != null || locCommodity != "") && locCommodityDate == currentDate){
+			updateCommodityDetails(ngStorage_commodity);
+		}
+	    else if(locCommodity == "" || locCommodityDate != currentDate)
         {
-          $.getJSON( BookIt.Settings.getCommodity , {
+		  $.getJSON( BookIt.Settings.getCommodity , {
+		  //$.getJSON( BookIt.Settings.getCommodity + "&languageReq=" + languageName , {
             format: "json"
           })
             .done(function( data ) {
               var cacheData = data;
               localStorage.setItem('ngStorage-commodityDate', currentDate);
-              localStorage.setItem('ngStorage-commodity', JSON.stringify(data));
+              localStorage.setItem(ngStorage_commodity, JSON.stringify(data));
+			  updateCommodityDetails(ngStorage_commodity);
             })
               .fail(function( jqxhr, textStatus, error ) {
                 var err = textStatus + ", " + error;
@@ -86,7 +93,7 @@ var app = {
 app.initialize();
 
 app.getAppLanguage(""); //read from localStorage if not update with default language 'english'
-app.getCommodity();
+//app.getCommodity(""); // read from localStorage
 
 // onSuccess Geolocation
      function geoLocationOnSuccess(position){
@@ -108,6 +115,7 @@ app.getCommodity();
  
 $(document).on("mobileinit", function (event, ui) {
     $.mobile.defaultPageTransition = "slide";
+	$.mobile.selectmenu.prototype.options.nativeMenu = false;
 });
     
 app.signupController = new BookIt.SignUpController();
@@ -115,13 +123,14 @@ app.singinController = new BookIt.SignInController();
 app.signupSucceededController = new BookIt.signupSucceededController();
 app.dashboardController = new BookIt.dashboardController();
 app.productController = new BookIt.productController();
+app.productOrderController = new BookIt.productOrderController();
+app.negotiateOrderController = new BookIt.negotiateOrderController();
 
 $(document).on("pagecontainerbeforeshow", function (event, ui) {
     if (typeof ui.toPage == "object") {
         switch (ui.toPage.attr("id")) {
             case "page-signup":
-                // Reset the signup form.
-                app.signupController.resetSignUpForm();
+                app.signupController.resetSignUpForm();// Reset the signup form.
                 break;
                 
             case "page-signup-succeeded":
@@ -138,6 +147,12 @@ $(document).on("pagecontainerbeforeshow", function (event, ui) {
 			case "page-uploadproducts":
                 app.productController.resetProductForm();
                 break;
+			case "page-orderHistory":
+                app.productOrderController.resetproductOrderForm();
+                break;	
+			case "page-negotiateHistory":
+                app.negotiateOrderController.resetNegotiateOrderForm();
+                break;	
         }
     }
 });
@@ -175,4 +190,18 @@ $(document).delegate("#page-uploadproducts", "pagebeforecreate", function () {
     app.productController.$btnSubmit.off("tap").on("tap", function () {
         app.productController.onProductSubmitCommand();
     });
+});
+
+$(document).delegate("#page-orderHistory", "pagebeforecreate", function () {
+    app.productOrderController.init();
+   // app.productOrderController.$btnSubmit.off("tap").on("tap", function () {
+    //    app.productOrderController.onprodutOrderHistoryCommand();
+    //});
+});
+
+$(document).delegate("#page-negotiateHistory", "pagebeforecreate", function () {
+    app.negotiateOrderController.init();
+   // app.negotiateOrderController.$btnSubmit.off("tap").on("tap", function () {
+   //     app.negotiateOrderController.onNegotiateOrderHistoryCommand();
+  //  });
 });

@@ -13,8 +13,8 @@ BookIt.dashboardController.prototype.init = function () {
     
     //load Commodity price
     $.mobile.loading("show");
-        app.getCommodity();
-        updateCommodityTable();
+      //  app.getCommodity();
+       // updateCommodityTable();
     $.mobile.loading("hide");
 };
 

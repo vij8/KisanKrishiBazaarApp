@@ -214,25 +214,18 @@
         <div role="main" class="ui-content">
 				<div id="product-ctn-err" class="bi-invisible"></div>
             	<label for="select-product">Product : <span>*</span></label>
-				<select name="select-product" id="select-product" data-native-menu="false" class="required">
-					<option value="0" data-placeholder="true">select  product...</option>
-					<option value="1">The 1st Option</option>
-					<option value="2">The 2nd Option</option>
-					<option value="3">The 3rd Option</option>
-					<option value="4">The 4th Option</option>
+				<select name="select-product" id="select-product" data-native-menu="false">
+					<option value="" data-placeholder="true" data-estimated-value="0">select  product...</option>	
+					
 				</select>
 				<label for="lbl-estimated-price">Estimated price: </label>
 				<input type="text" name="lbl-estimated-price" id="lbl-estimated-price" value="" placeholder="estimated price" readonly></input> 
 				<label for="select-quantity">Quantity : <span>*</span></label>
-				<select name="select-quantity" id="select-quantity" data-native-menu="false" class="required">
-					<option value="0" data-placeholder="true">select  quantity...</option>
-					<option value="1">100</option>
-					<option value="2">200</option>
-					<option value="3">300</option>
-					<option value="4">400</option>
+				<select name="select-quantity" id="select-quantity" data-native-menu="false">
+					<option value="" data-placeholder="true">select  quantity...</option>					
 				</select>
 				<label for="txt-quote-price">Quote price: </label>
-				<input type="text" name="txt-quote-price" id="txt-quote-price" value="" placeholder="Quote price"></input> 
+				<input type="number" name="txt-quote-price" id="txt-quote-price" value="" placeholder="Quote price"></input> 
 				<div class="ui-block-a">
 					<button id="btn-uploadproductsubmit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" value="" >Submit</button>
 				</div>
@@ -363,7 +356,6 @@
     </div><!-- /page -->
     
     
-	
     <script type="text/javascript" src="cordova.js"></script>
     <script src="lib/fastclick/fastclick.js"></script>
     <script src="lib/jquery/jquery-2.1.1.js"></script>
@@ -376,8 +368,8 @@
     <script src="js/signupsucceeded-controller.js"></script>
     <script src="js/dashboard-controller.js"></script>
 	<script src="js/product-controller.js"></script>
+	<script src="js/productOrder-controller.js"></script>
+	<script src="js/negotiateOrder-controller.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
-    
-
 </html>

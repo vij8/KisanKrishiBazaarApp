@@ -13,7 +13,7 @@ BookIt.SignInController = function () {
 
 BookIt.SignInController.prototype.init = function () {
     this.$signInPage = $("#page-signin");
-    this.mainMenuPageId = "#page-main-menu";
+    this.mainMenuPageId = "#page-dashboard";
     this.$btnSubmit = $("#btn-submit", this.$signInPage);
     this.$ctnErr = $("#ctn-err", this.$signInPage);
     this.$txtUserName = $("#txt-UserName", this.$signInPage);
@@ -68,7 +68,7 @@ BookIt.SignInController.prototype.onSignInCommand = function () {
     $.ajax({
         type: 'POST',
         url: BookIt.Settings.signInUrl,
-        data: "email=" + userName + "&password=" + password,
+        data: "username=" + userName + "&password=" + password,
         success: function (resp) {
             $.mobile.loading("hide");
             if (resp.success === true) {

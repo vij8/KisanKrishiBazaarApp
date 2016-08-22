@@ -12,7 +12,50 @@ $(document).ready(function(){
 	   app.closeApplication();	   
    });
    
+   $("#select-product").bind("change",function(){
+	   setOptionValue();
+	   var selEstimatedPrice = $(this).attr("data-estimated-value");
+	   if(selEstimatedPrice != ""){
+		   $("#lbl-estimated-price").val(selEstimatedPrice);
+	   }
+   });
+   
+   $("#select-quantity").bind("change",function(){
+	  var selEstimatedPrice = $(this).attr("data-estimated-value");
+	   var selEstimatedPrice = $(this).attr("data-selected-product");
+	   if(selEstimatedPrice != ""){
+		  // $("#lbl-estimated-price").val(selEstimatedPrice);
+	   }
+	});
+      
 });
+
+
+function setOptionValue(value){
+  var reminderSettings = $("#select-product");
+  reminderSettings.val(value).attr('selected', true).siblings('option').removeAttr('selected');  
+	reminderSettings.selectmenu("refresh", true);  
+}
+
+
+function updateCommodityDetails(localStorageName){
+	var locCommodityDetails = $.parseJSON(localStorage.getItem(localStorageName));
+	if(locCommodityDetails != ""){
+		//update drowdown fields
+		var productitems = [];
+		var quantityitems = [];
+		$.each(locCommodityDetails,function(key,value){
+			productitems.push("<option value='"+ key + "' data-placeholder='true' data-estimated-value='" + value.price + "' >" + value.item + "</option>");
+			
+			quantityitems.push("<option value='"+ key + "' data-placeholder='true' data-estimated-value='" + value.price + "'  data-selected-product='" + value.item +  "'>" + value.quantity + "</option>");
+		});
+		$('#select-product').append(productitems);
+		
+		$('#select-quantity').append(quantityitems);
+				
+	}
+	
+}
 
 function updateApplicationLanguage(){
         var readLanguageJson = JSON.parse(localStorage.getItem("ngStorage-defLanguageData"));

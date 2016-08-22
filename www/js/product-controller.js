@@ -20,6 +20,11 @@ BookIt.productController.prototype.init = function () {
 	this.$lblEstimatedPrice = $("#lbl-estimated-price",this.$productUploadPage);
 	this.$ctnErr = $("#product-ctn-err",this.$productUploadPage);
 	this.$dlguploadproductsubmitsuccess = $("#dlg-uploadproductsubmit-success",this.$productUploadPage);
+	
+	
+	var locCurrentLangType = localStorage.getItem("ngStorage-defLanguageType") == undefined ? "english" : localStorage.getItem("ngStorage-defLanguageType");
+	app.getCommodity(locCurrentLangType.toLowerCase()); // read from localStorage
+	    
 };
 
 BookIt.productController.prototype.resetProductForm = function () {
@@ -59,9 +64,19 @@ BookIt.productController.prototype.onProductSubmitCommand = function () {
         me.$selProduct.addClass(invalidInputStyle);
         invalidInput = true;
     }
+	if (selQuantity.length === 0) {
+        me.$selQuantity.addClass(invalidInputStyle);		
+        invalidInput = true;
+    }
+	
+	if(quotePrice < estimatedPrice){
+		me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.QuotepricelessthanEstimatedPrice +".</p>");
+        me.$ctnErr.addClass("bi-ctn-err").slideDown();
+        return;
+	}
     // Make sure that all the required fields have values.
     if (invalidInput) {
-        me.$ctnErr.html("<p>Please enter all the required fields.</p>");
+        me.$ctnErr.html("<p>" + BookIt.Settings.AppErrorMessage.english.requiredfield +".</p>");
         me.$ctnErr.addClass("bi-ctn-err").slideDown();
         return;
     }

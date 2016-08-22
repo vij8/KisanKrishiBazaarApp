@@ -2,12 +2,33 @@ var BookIt = BookIt || {};
 BookIt.Settings = BookIt.Settings || {};
 BookIt.Settings.language = BookIt.Settings.language || {};
 BookIt.Settings.api = BookIt.Settings.api || {};
+BookIt.Settings.AppErrorMessage = BookIt.Settings.AppErrorMessage || {};
+BookIt.Settings.AppErrorMessage.english = BookIt.Settings.AppErrorMessage.english || {};
+BookIt.Settings.AppErrorMessage.hindi = BookIt.Settings.AppErrorMessage.hindi || {};
+BookIt.Settings.AppErrorMessage.marathi = BookIt.Settings.AppErrorMessage.marathi || {};
+
 BookIt.Settings.signUpUrl = "http://192.168.1.104:30000/api/account/register"; 
-BookIt.Settings.signInUrl = "http://10.216.240.36:4567/kkb/login"; 
+BookIt.Settings.signInUrl =  "http://10.216.240.36:4567/retailer/login";//"http://10.216.240.36:4567/kkb/login"; 
 BookIt.Settings.validateUserNameUrl = "http://192.168.1.104:30000/api/account/register";
 BookIt.Settings.getDefaultLanguage = "/json/language.json";
-BookIt.Settings.getCommodity = "http://10.216.240.36:4567/farmer/getCommodity?languageReq=Hindi";//"/json/commodity_response.json";
+BookIt.Settings.getCommodity = "/json/commodity_hindi.json";//"http://10.216.240.36:4567/farmer/getCommodity/";//"/json/commodity_response.json";
 BookIt.Settings.api.postProductDetail = "http://10.216.240.36:4567/kkb/postproductDetail";
+
+
+
+BookIt.Settings.AppErrorMessage.english.requiredfield = "Quote price can not be greater than estimated-price";
+BookIt.Settings.AppErrorMessage.english.QuotepricelessthanEstimatedPrice = "Quote price can not be greater than estimated-price";
+
+
+
+
+
+
+
+
+
+
+
 
 BookIt.Settings.language.wcf_lblPageHeading = "wcf-lblPageHeading";
 BookIt.Settings.language.wcf_lblPageContentHeading= "wcf-lblPageContentHeading";
