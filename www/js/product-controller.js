@@ -23,8 +23,6 @@ BookIt.productController.prototype.init = function () {
 	
 	var locCurrentLangType = localStorage.getItem("ngStorage-defLanguageType") == undefined ? "english" : localStorage.getItem("ngStorage-defLanguageType");
 	app.getCommodity(locCurrentLangType.toLowerCase()); // read from localStorage	
-	
-	
 	    
 };
 
@@ -57,7 +55,8 @@ BookIt.productController.prototype.onProductSubmitCommand = function () {
 	me.$selQuantity.removeClass(invalidInputStyle);
 	me.$lblEstimatedPrice.removeClass(invalidInputStyle);
 	
-	var currentLanguage = localStorage.getItem("ngStorage-defLanguageType");
+	var currentLanguage = localStorage.getItem("ngStorage-defLanguageType") == undefined ? "english" : localStorage.getItem("ngStorage-defLanguageType");
+	 var username = localStorage.getItem("ngStorage-loggedInUserName");
     // Flag each invalid field.
     if (quotePrice.length === 0) {
         me.$txtQuotePrice.addClass(invalidInputStyle);
@@ -111,37 +110,59 @@ BookIt.productController.prototype.onProductSubmitCommand = function () {
 		me.$ctnErr.addClass("bi-ctn-err").slideDown();
         return;
     }
-    $("#dlg-uploadproductsubmit-success").popup('open');				
-     return;
+    	
     $.mobile.loading("show");
     $.ajax({
         type: 'POST',
         url: BookIt.Settings.api.postProductDetail,
-        data: "product=" + selProduct + "&qty=" + selQuantity + "&eprice=" + estimatedPrice + "&qprice=" + quotePrice,
+        data: "item=" + selProduct + "&qty=" + selQuantity + "&estimatedprice=" + estimatedPrice + "&quotedprice=" + quotePrice
+		+ "&username=" + username + "&language=" + currentLanguage.toLowerCase(),
         success: function (resp) {
             $.mobile.loading("hide");
-            if (resp.success === true) {
+            if (resp != "") {
                 // Navigate to Order history Page                
                 //$.mobile.navigate(me.mainMenuPageId);
 				$("#dlg-uploadproductsubmit-success").popup('open');				
                 return;
             } else {
-                if (resp.extras.msg) {
-                    switch (resp.extras.msg) {
-                        case BookIt.ApiMessages.DB_ERROR:
-                        // TODO: Use a friendlier error message below.
-                            me.$ctnErr.html("<p>Oops! product upload had a problem. Please try again in a few minutes.</p>");
-                            me.$ctnErr.addClass("bi-ctn-err").slideDown();
-                            break;
-                    }
-                }
-            }
+				 // TODO: Use a friendlier error message below.
+				 if(currentLanguage == "") {
+					me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.serverError +".</p>");
+				}else{
+						switch(currentLanguage.toLowerCase()){
+							case "hindi" :
+							me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.hindi.serverError +".</p>");
+							break;
+							case "marathi" :
+							me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.marathi.serverError +".</p>");
+							break;
+							default:
+							me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.serverError +".</p>");
+							break;
+						}
+					}
+					me.$ctnErr.addClass("bi-ctn-err").slideDown();
+		        }
         },
         error: function (e) {
             $.mobile.loading("hide");
             console.log(e.message);
             // TODO: Use a friendlier error message below.
-            me.$ctnErr.html("<p>Oops! product upload had a problem. Please try again in a few minutes.</p>");
+             if(currentLanguage == "") {
+					me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.serverError +".</p>");
+				}else{
+						switch(currentLanguage.toLowerCase()){
+							case "hindi" :
+							me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.hindi.serverError +".</p>");
+							break;
+							case "marathi" :
+							me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.marathi.serverError +".</p>");
+							break;
+							default:
+							me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.serverError +".</p>");
+							break;
+						}
+					}
             me.$ctnErr.addClass("bi-ctn-err").slideDown();
         }
     });

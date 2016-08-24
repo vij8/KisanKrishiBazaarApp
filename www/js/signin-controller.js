@@ -88,41 +88,38 @@ BookIt.SignInController.prototype.onSignInCommand = function () {
         data: "username=" + userName + "&password=" + password,
         success: function (resp) {
             $.mobile.loading("hide");
-			var locUsrDetails = $.parseJSON(resp);
-			if(locUsrDetails != ""){
-				localStorage.setItem("loggedInUser",resp)
+			if(resp != ""){
+				var locUsrDetails = $.parseJSON(resp);
+				if(locUsrDetails != ""){
+					localStorage.setItem("loggedInUser",resp)
+					
+				}
+				if (locUsrDetails.username != "") {
+					// Create session. 
+					localStorage.setItem("ngStorage-loggedInUserName",locUsrDetails.username)
+					var today = new Date();
+					var expirationDate = new Date();
+					expirationDate.setTime(today.getTime() + BookIt.Settings.sessionTimeoutInMSec);
+					BookIt.Session.getInstance().set({
+						userProfileModel: locUsrDetails.username,
+						sessionId: locUsrDetails.username +'-'+ today.getTime() + BookIt.Settings.sessionTimeoutInMSec,//resp.extras.sessionId,
+						expirationDate: expirationDate,
+						keepSignedIn:me.$chkKeepSignedIn.is(":checked")
+					});
+					// Go to main menu.
+					$.mobile.navigate(me.mainMenuPageId);
+					return;
+				}
+				else{
+				 // TODO: Use a friendlier error message below.
+					me.$ctnErr.html("<p>Oops! BookIt had a problem and could not log you on.  Please try again in a few minutes.</p>");
+					me.$ctnErr.addClass("bi-ctn-err").slideDown();	
+				}
 			}
-		    if (locUsrDetails.username != "") {
-                // Create session. 
-                var today = new Date();
-                var expirationDate = new Date();
-                expirationDate.setTime(today.getTime() + BookIt.Settings.sessionTimeoutInMSec);
-                BookIt.Session.getInstance().set({
-                    userProfileModel: locUsrDetails.username,
-                    sessionId: locUsrDetails.username +'-'+ today.getTime() + BookIt.Settings.sessionTimeoutInMSec,//resp.extras.sessionId,
-                    expirationDate: expirationDate,
-                    keepSignedIn:me.$chkKeepSignedIn.is(":checked")
-                });
-				// Go to main menu.
-                $.mobile.navigate(me.mainMenuPageId);
-                return;
-            } else {
-                if (resp.extras.msg) {
-                    switch (resp.extras.msg) {
-                        case BookIt.ApiMessages.DB_ERROR:
-                        // TODO: Use a friendlier error message below.
-                            me.$ctnErr.html("<p>Oops! BookIt had a problem and could not log you on.  Please try again in a few minutes.</p>");
-                            me.$ctnErr.addClass("bi-ctn-err").slideDown();
-                            break;
-                        case BookIt.ApiMessages.INVALID_PWD:
-                        case BookIt.ApiMessages.EMAIL_NOT_FOUND:
-                            me.$ctnErr.html("<p>You entered a wrong username or password.  Please try again.</p>");
-                            me.$ctnErr.addClass("bi-ctn-err").slideDown();
-                            me.$txtEmailAddress
-.addClass(invalidInputStyle);
-                            break;
-                    }
-                }
+			else {
+                 // TODO: Use a friendlier error message below.
+				me.$ctnErr.html("<p>Oops! BookIt had a problem and could not log you on.  Please try again in a few minutes.</p>");
+                me.$ctnErr.addClass("bi-ctn-err").slideDown();
             }
         },
         error: function (e) {

@@ -54,6 +54,10 @@ BookIt.Settings.AppErrorMessage.english.passwordmismatch = "Your passwords don't
 BookIt.Settings.AppErrorMessage.hindi.passwordmismatch = "आपके पासवर्ड मेल नहीं खाते";
 BookIt.Settings.AppErrorMessage.marathi.passwordmismatch = "आपले संकेतशब्द जुळत नाही";
 
+BookIt.Settings.AppErrorMessage.english.serverError = "Oops! server issue. Please try again in a few minutes";
+BookIt.Settings.AppErrorMessage.hindi.serverError = "उफ़! सर्वर मुद्दा। कृपया कुछ देर बाद दुबारा कोशिश करे";
+BookIt.Settings.AppErrorMessage.marathi.serverError = "अरेरे! सर्व्हर समस्या. काही मिनिटांत पुन्हा प्रयत्न करा";
+
 
 
 

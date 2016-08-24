@@ -25,9 +25,7 @@ function updateCommodityDetails(localStorageName){
 			productitems.push("<option value='"+ key + "' data-placeholder='true' data-estimated-value='" + value.price + "' >" + value.item + "</option>");
 			
 			quantityitems.push("<option value='"+ key + "' data-placeholder='true' data-estimated-value='" + value.price + "'  data-selected-product='" + value.item +  "'>" + value.quantity + "</option>");
-		});
-		//$('#select-product').empty().append(productitems).selectmenu().selectmenu('refresh',true);
-		//$('#select-quantity').empty().append(quantityitems).selectmenu().selectmenu('refresh',true);				
+		});					
 	}	
 }
 
