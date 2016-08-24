@@ -2,26 +2,43 @@ var BookIt = BookIt || {};
 BookIt.Settings = BookIt.Settings || {};
 BookIt.Settings.language = BookIt.Settings.language || {};
 BookIt.Settings.api = BookIt.Settings.api || {};
+
+
 BookIt.Settings.AppErrorMessage = BookIt.Settings.AppErrorMessage || {};
 BookIt.Settings.AppErrorMessage.english = BookIt.Settings.AppErrorMessage.english || {};
 BookIt.Settings.AppErrorMessage.hindi = BookIt.Settings.AppErrorMessage.hindi || {};
 BookIt.Settings.AppErrorMessage.marathi = BookIt.Settings.AppErrorMessage.marathi || {};
 
+
+BookIt.Settings.sessionTimeoutInMSec = "30000";
 BookIt.Settings.signUpUrl = "http://192.168.1.104:30000/api/account/register"; 
-BookIt.Settings.signInUrl =  "http://10.216.240.36:4567/retailer/login";//"http://10.216.240.36:4567/kkb/login"; 
+BookIt.Settings.signInUrl =  "http://10.216.240.36:4567/retailer/login"; 
 BookIt.Settings.validateUserNameUrl = "http://192.168.1.104:30000/api/account/register";
-BookIt.Settings.getDefaultLanguage = "/json/language.json";
-BookIt.Settings.getCommodity = "/json/commodity_hindi.json";//"http://10.216.240.36:4567/farmer/getCommodity/";//"/json/commodity_response.json";
-BookIt.Settings.api.postProductDetail = "http://10.216.240.36:4567/kkb/postproductDetail";
+
+BookIt.Settings.getDefaultLanguage = "http://10.216.240.36:8080/farmer/translation"; //"/json/language.json";
+BookIt.Settings.getCommodity = "http://10.216.240.36:8080/farmer/getCommodity/";// "/json/commodity_hindi.json";
+BookIt.Settings.api.postProductDetail = "http://10.216.240.36:8080/orderInsert/";
+BookIt.Settings.api.getOrderHistoryByUserName = "http://10.216.240.36:8080/farmer/getOrderHistory/";
 
 
 
-BookIt.Settings.AppErrorMessage.english.requiredfield = "Quote price can not be greater than estimated-price";
+
+
 BookIt.Settings.AppErrorMessage.english.QuotepricelessthanEstimatedPrice = "Quote price can not be greater than estimated-price";
+BookIt.Settings.AppErrorMessage.hindi.QuotepricelessthanEstimatedPrice = "बोली का मूल्य अनुमान मूल्य से अधिक नहीं हो सकता है";
+BookIt.Settings.AppErrorMessage.marathi.QuotepricelessthanEstimatedPrice = "कोट किंमत अंदाजे किंमत पेक्षा जास्त असू शकत नाही";
 
+BookIt.Settings.AppErrorMessage.english.productRequiredField = "Please enter all the required fields";
+BookIt.Settings.AppErrorMessage.hindi.productRequiredField = "सभी आवश्यक फ़ील्ड दर्ज करें";
+BookIt.Settings.AppErrorMessage.marathi.productRequiredField = "सर्व आवश्यक फील्ड प्रविष्ट करा";
 
+BookIt.Settings.AppErrorMessage.english.userExist = "user name already exist";
+BookIt.Settings.AppErrorMessage.hindi.userExist = "उपयोगकर्ता नाम पहले से मौजूद";
+BookIt.Settings.AppErrorMessage.marathi.userExist = "वापरकर्ता नाव आधीच अस्तित्वात";
 
-
+BookIt.Settings.AppErrorMessage.english.passwordmismatch = "Your passwords don't match";
+BookIt.Settings.AppErrorMessage.hindi.passwordmismatch = "आपके पासवर्ड मेल नहीं खाते";
+BookIt.Settings.AppErrorMessage.marathi.passwordmismatch = "आपले संकेतशब्द जुळत नाही";
 
 
 

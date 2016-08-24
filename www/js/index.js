@@ -7,35 +7,10 @@ $(document).ready(function(){
            app.getAppLanguage(languageName);           
        }
    }); 
-   
    $("#btn-logout-yes").on('click',function(e){
 	   app.closeApplication();	   
-   });
-   
-   $("#select-product").bind("change",function(){
-	   setOptionValue();
-	   var selEstimatedPrice = $(this).attr("data-estimated-value");
-	   if(selEstimatedPrice != ""){
-		   $("#lbl-estimated-price").val(selEstimatedPrice);
-	   }
-   });
-   
-   $("#select-quantity").bind("change",function(){
-	  var selEstimatedPrice = $(this).attr("data-estimated-value");
-	   var selEstimatedPrice = $(this).attr("data-selected-product");
-	   if(selEstimatedPrice != ""){
-		  // $("#lbl-estimated-price").val(selEstimatedPrice);
-	   }
-	});
-      
+   });      
 });
-
-
-function setOptionValue(value){
-  var reminderSettings = $("#select-product");
-  reminderSettings.val(value).attr('selected', true).siblings('option').removeAttr('selected');  
-	reminderSettings.selectmenu("refresh", true);  
-}
 
 
 function updateCommodityDetails(localStorageName){
@@ -44,15 +19,23 @@ function updateCommodityDetails(localStorageName){
 		//update drowdown fields
 		var productitems = [];
 		var quantityitems = [];
+		productitems.push("<option value='' data-placeholder='true' data-estimated-value='' >select product</option>");
+		quantityitems.push("<option value='' data-placeholder='true' data-estimated-value=''  data-selected-product=''>select quantity</option>");
 		$.each(locCommodityDetails,function(key,value){
 			productitems.push("<option value='"+ key + "' data-placeholder='true' data-estimated-value='" + value.price + "' >" + value.item + "</option>");
 			
 			quantityitems.push("<option value='"+ key + "' data-placeholder='true' data-estimated-value='" + value.price + "'  data-selected-product='" + value.item +  "'>" + value.quantity + "</option>");
 		});
-		$('#select-product').append(productitems);
+		//$('#select-product').empty().append(productitems).selectmenu().selectmenu('refresh',true);
+		//$('#select-quantity').empty().append(quantityitems).selectmenu().selectmenu('refresh',true);				
+	}	
+}
+
+
+function updateOrderHistoryForm(localStorageName){
+	var locOrdersDetails = $.parseJSON(localStorage.getItem(localStorageName));
+	if(locOrdersDetails != ""){
 		
-		$('#select-quantity').append(quantityitems);
-				
 	}
 	
 }
@@ -75,6 +58,12 @@ function updateApplicationLanguage(){
             else if(key.toLowerCase().indexOf("db-") >= 0){
                 updateDashboardPage(key,value);
             }
+			else if(key.toLowerCase().indexOf("lblPagefooter") >= 0){
+				$(".lblPagefooter").html(value);
+			}
+			else if(key.toLowerCase().indexOf("lblpageHeader") >= 0){
+				$(".lblpageHeader").html(value);
+			}
                 
         });
     }
@@ -120,10 +109,7 @@ function updateApplicationLanguage(){
         }
                 
     function updateSignUpPage(key,value){
-              switch(key){
-                case BookIt.Settings.language.suf_lblPageHeading:
-					$("#suf_lblPageHeading").html(value);
-					break;
+              switch(key){               
                 case BookIt.Settings.language.suf_lblPageContentHeading:
 					$("#suf_lblPageContentHeading").html(value);
 					break;
@@ -144,22 +130,16 @@ function updateApplicationLanguage(){
 					break;
 				case BookIt.Settings.language.suf_btnSubmit:
 					$("#suf_btnSubmit").html(value);
-					break;
-				case BookIt.Settings.language.suf_footerText:
-					$("#suf_footerText").html(value);
-					break;
+					break;				
 				default:
 					break;
             }
         }
     
     function updateSignInPage(key,value){
-		 switch(key){
-            case BookIt.Settings.language.sif_lblPageHeading:
-               $("#sif_lblPageHeading").html(value);
-                break;
-            case BookIt.Settings.language.wcf_lblPageContentHeading: 
-            $("#wcf_lblPageContentHeading").html(value);
+		 switch(key){            
+            case BookIt.Settings.language.sif_lblPageContentHeading: 
+            $("#sif_lblPageContentHeading").html(value);
                 break;
             case BookIt.Settings.language.sif_lblUserName:
                 $("#sif_lblUserName").html(value);
@@ -175,10 +155,7 @@ function updateApplicationLanguage(){
                 break;
 			case BookIt.Settings.language.sif_btnsubmit:
                 $("#sif_btnsubmit").html(value);
-                break;		
-            case BookIt.Settings.language.sif_footerText:
-                $("#sif_footerText").html(value);
-                break;
+                break;		            
             default:
                 break;
             }
@@ -191,16 +168,10 @@ function updateApplicationLanguage(){
                 break;
             case BookIt.Settings.language.susf_lblPageContentHeading: 
             $("#susf_lblPageContentHeading").html(value);
-                break;
-            case BookIt.Settings.language.susf_lblPageHeading:
-                $("#susf_lblPageHeading").html(value);
-                break;
+                break;           
             case BookIt.Settings.language.susf_btnSubmit:
                 $("#susf_btnSubmit").html(value);
-                break;
-			case BookIt.Settings.language.susf_footerText:
-                $("#susf_footerText").html(value);
-                break;
+                break;			
 			default:
                 break;
         }

@@ -48,6 +48,9 @@ BookIt.SignInController.prototype.onSignInCommand = function () {
     me.$ctnErr.removeClass().addClass(invisibleStyle);
     me.$txtUserName.removeClass(invalidInputStyle);
     me.$txtPassword.removeClass(invalidInputStyle);
+	
+	var currentLanguage = localStorage.getItem("ngStorage-defLanguageType");
+	
     // Flag each invalid field.
     if (userName.length === 0) {
         me.$txtUserName.addClass(invalidInputStyle);
@@ -59,7 +62,21 @@ BookIt.SignInController.prototype.onSignInCommand = function () {
     }
     // Make sure that all the required fields have values.
     if (invalidInput) {
-        me.$ctnErr.html("<p>Please enter all the required fields.</p>");
+        if(currentLanguage == "") {
+			me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.productRequiredField +".</p>");
+		}else{
+			switch(currentLanguage.toLowerCase()){
+				case "hindi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.hindi.productRequiredField +".</p>");
+				break;
+				case "marathi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.marathi.productRequiredField +".</p>");
+				break;
+				default:
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.productRequiredField +".</p>");
+				break;
+			}
+		}
         me.$ctnErr.addClass("bi-ctn-err").slideDown();
         return;
     }
@@ -71,18 +88,22 @@ BookIt.SignInController.prototype.onSignInCommand = function () {
         data: "username=" + userName + "&password=" + password,
         success: function (resp) {
             $.mobile.loading("hide");
-            if (resp.success === true) {
+			var locUsrDetails = $.parseJSON(resp);
+			if(locUsrDetails != ""){
+				localStorage.setItem("loggedInUser",locUsrDetails)
+			}
+		    if (locUsrDetails.username != "") {
                 // Create session. 
                 var today = new Date();
                 var expirationDate = new Date();
                 expirationDate.setTime(today.getTime() + BookIt.Settings.sessionTimeoutInMSec);
                 BookIt.Session.getInstance().set({
-                    userProfileModel: resp.extras.userProfileModel,
-                    sessionId: resp.extras.sessionId,
+                    userProfileModel: locUsrDetails.username,
+                    sessionId: locUsrDetails.username +'-'+ today.getTime() + BookIt.Settings.sessionTimeoutInMSec,//resp.extras.sessionId,
                     expirationDate: expirationDate,
                     keepSignedIn:me.$chkKeepSignedIn.is(":checked")
                 });
-                // Go to main menu.
+				// Go to main menu.
                 $.mobile.navigate(me.mainMenuPageId);
                 return;
             } else {

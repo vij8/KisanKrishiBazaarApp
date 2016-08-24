@@ -90,6 +90,8 @@ BookIt.SignUpController.prototype.onSignUpCommand = function () {
     me.$txtPassword.removeClass(invalidInputStyle);
     me.$txtPasswordConfirm.removeClass(invalidInputStyle);
 
+	var currentLanguage = localStorage.getItem("ngStorage-defLanguageType");
+	
     // Flag each invalid field.
     if (firstName.length === 0) {
         me.$txtFirstName.addClass(invalidInputStyle);
@@ -114,20 +116,62 @@ BookIt.SignUpController.prototype.onSignUpCommand = function () {
 
     // Make sure that all the required fields have values.
     if (invalidInput) {
-        me.$ctnErr.html("<p>Please enter all the required fields.</p>");
+         if(currentLanguage == "") {
+			me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.productRequiredField +".</p>");
+		}else{
+			switch(currentLanguage.toLowerCase()){
+				case "hindi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.hindi.productRequiredField +".</p>");
+				break;
+				case "marathi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.marathi.productRequiredField +".</p>");
+				break;
+				default:
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.productRequiredField +".</p>");
+				break;
+			}
+		}
         me.$ctnErr.addClass("bi-ctn-err").slideDown();
         return;
     }
 
     if (!me.userNameIsValid(userName)) {
-        me.$ctnErr.html("<p>user name already exist.</p>");
+         if(currentLanguage == "") {
+			me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.userExist +".</p>");
+		}else{
+			switch(currentLanguage.toLowerCase()){
+				case "hindi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.hindi.userExist +".</p>");
+				break;
+				case "marathi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.marathi.userExist +".</p>");
+				break;
+				default:
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.userExist +".</p>");
+				break;
+			}
+		}
         me.$ctnErr.addClass("bi-ctn-err").slideDown();
         me.$txtUserName.addClass(invalidInputStyle);
         return;
     }
 
     if (!me.passwordsMatch(password, passwordConfirm)) {
-        me.$ctnErr.html("<p>Your passwords don't match.</p>");
+         if(currentLanguage == "") {
+			me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.passwordmismatch +".</p>");
+		}else{
+			switch(currentLanguage.toLowerCase()){
+				case "hindi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.hindi.passwordmismatch +".</p>");
+				break;
+				case "marathi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.marathi.passwordmismatch +".</p>");
+				break;
+				default:
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.passwordmismatch +".</p>");
+				break;
+			}
+		}
         me.$ctnErr.addClass("bi-ctn-err").slideDown();
         me.$txtPassword.addClass(invalidInputStyle);
         me.$txtPasswordConfirm.addClass(invalidInputStyle);

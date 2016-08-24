@@ -38,7 +38,7 @@ var app = {
 			if(locCurrentData == "" || locCurrentLangType != languageName)
 			{
 			  languageName = languageName == "" ? "english" : languageName; //set default lang English 	
-			  $.getJSON( BookIt.Settings.getDefaultLanguage + "?type=" +languageName, {
+			  $.getJSON( BookIt.Settings.getDefaultLanguage + "?Language=" +languageName, {
 				format: "json"
 			   })
 				.done(function( data ) {
@@ -76,6 +76,32 @@ var app = {
               localStorage.setItem('ngStorage-commodityDate', currentDate);
               localStorage.setItem(ngStorage_commodity, JSON.stringify(data));
 			  updateCommodityDetails(ngStorage_commodity);
+            })
+              .fail(function( jqxhr, textStatus, error ) {
+                var err = textStatus + ", " + error;
+                console.log( "Commodity request failed: " + err );
+          });
+        }
+    },
+	
+	 getOrders : function(languageName){
+		languageName = languageName == "" ? "english" : languageName; //set default lang English 
+		var userSession =$.parseJSON(localStorage.getItem("bookit-session"));
+		var ngStorage_orders = "ngStorage-orders-"+ userSession.username + "-" +  languageName;
+        var locOrders = localStorage.getItem(ngStorage_orders);
+        if(locOrders != null || locOrders != ""){
+			updateOrderHistoryForm(ngStorage_orders);
+		}
+	    else
+        {
+		  $.getJSON( BookIt.Settings.api.getOrderHistoryByUserName + "?username=" + userSession + "&language=" + languageName.toLowerCase() , {
+		    format: "json"
+          })
+            .done(function( data ) {
+				if(data != ""){
+					localStorage.setItem(ngStorage_commodity, JSON.stringify(data));
+					updateOrderHistoryForm(ngStorage_orders);
+				}
             })
               .fail(function( jqxhr, textStatus, error ) {
                 var err = textStatus + ", " + error;
@@ -127,8 +153,18 @@ app.productOrderController = new BookIt.productOrderController();
 app.negotiateOrderController = new BookIt.negotiateOrderController();
 
 $(document).on("pagecontainerbeforeshow", function (event, ui) {
-    if (typeof ui.toPage == "object") {
-        switch (ui.toPage.attr("id")) {
+	if (typeof ui.toPage !== "object") return;
+	
+    switch (ui.toPage.attr("id")) {
+			case "page-index":
+            if (!ui.prevPage) {
+                // Check session.keepSignedIn and redirect to main menu.
+                var session = BookIt.Session.getInstance().get(),
+                    today = new Date();
+                if (session && session.keepSignedIn && new Date(session.expirationDate).getTime() > today.getTime()) {
+                    ui.toPage = $("#page-dasboard");                }
+            }
+			break;
             case "page-signup":
                 app.signupController.resetSignUpForm();// Reset the signup form.
                 break;
@@ -153,9 +189,8 @@ $(document).on("pagecontainerbeforeshow", function (event, ui) {
 			case "page-negotiateHistory":
                 app.negotiateOrderController.resetNegotiateOrderForm();
                 break;	
-        }
     }
-});
+ });
 
 $(document).delegate("#page-signup", "pagebeforecreate", function () {
     app.signupController.init();
@@ -204,4 +239,65 @@ $(document).delegate("#page-negotiateHistory", "pagebeforecreate", function () {
    // app.negotiateOrderController.$btnSubmit.off("tap").on("tap", function () {
    //     app.negotiateOrderController.onNegotiateOrderHistoryCommand();
   //  });
+});
+
+
+$(document).on('pagebeforeshow', '#page-uploadproducts', function(){ 
+   
+   var locCurrentLangType = localStorage.getItem("ngStorage-defLanguageType") == undefined ? "english" : localStorage.getItem("ngStorage-defLanguageType");
+   var ngStorage_commodity = "ngStorage-commodity-" + locCurrentLangType.toLowerCase();
+   
+   var locCommodityDetails = $.parseJSON(localStorage.getItem(ngStorage_commodity));
+	if(locCommodityDetails != ""){
+		//update drowdown fields
+		var productitems = [];
+		var quantityitems = [];
+		productitems.push("<option value='' data-placeholder='true' data-estimated-value='' >select product</option>");
+		quantityitems.push("<option value='' data-placeholder='true' data-estimated-value=''  data-selected-product=''>select quantity</option>");
+		
+		$.each(locCommodityDetails,function(key,value){
+			productitems.push("<option value='"+ key + "' data-placeholder='true' data-estimated-value='" + value.price + "' >" + value.item + "</option>");
+			quantityitems.push("<option value='"+ key + "' data-placeholder='true' data-estimated-value='" + value.price + "'  data-selected-product='" + value.item +  "'>" + value.quantity + "</option>");
+		});
+	
+	   $("#select-product").append(productitems);
+	   $("#select-quantity").append(quantityitems);
+	   $("#select-product").selectmenu();
+	   $("#select-product").selectmenu('refresh', true);
+	   $("#select-quantity").selectmenu();
+	   $("#select-quantity").selectmenu('refresh', true);
+	}
+		
+	$("#select-product").on("change",function(){
+		var lblEstimateValue = $('option:selected', this).attr('data-estimated-value');
+		$("#lbl-estimated-price").val(lblEstimateValue);		
+	});	
+	
+	$("#select-quantity").on("change",function(){
+		var lblEstimateValue = $('option:selected', this).attr('data-selected-product"');		
+	});	
+	
+});
+
+$(document).on('pagebeforeshow', '#page-orderHistory', function(){ 
+    var j=0;
+   var items = [];
+   for(j=0;j<=5;j++){
+        items.push("<tr><th><b class='ui-table-cell-label'>Submitted Date</b>"+j+"</th>");
+        items.push("<td><b class='ui-table-cell-label'>Product</b>maek"+j+"</td>");
+        items.push("<td><b class='ui-table-cell-label'>Estimated Price</b>good"+j +"</td>");
+        items.push("<td><b class='ui-table-cell-label'>Quoted Price</b>arr"+j +"</td>");        
+        items.push("<td><b class='ui-table-cell-label'>Status</b><select  class='flipswitch'  name='flip-min' id='flip-min"+j+"' data-role='slider'><option value='off"+j+"'>Switch Off</option<option value='on"+j+"'>Switch On</option></select>");
+    }
+      $('#orderHistoryTable')
+		.find('tbody').append(items)
+		.trigger('update');
+		 
+		 $(".flipswitch").slider();
+			$(".flipswitch").slider( "refresh" );	
+
+		$(".flipswitch").on("change",function(){
+			var selectedValue = $( "option:selected", this ).val();
+			alert(selectedValue);
+		});
 });

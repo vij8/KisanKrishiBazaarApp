@@ -26,8 +26,7 @@
 <body>
   <div data-role="page" id="page-index">
         <div data-role="header" data-theme="c" data-position="fixed">
-            <h1 id="wcf_lblPageHeading">Kisan Krishi Bazaar</h1>
-            <p id="geolocation">Watching geolocation...</p>
+            <h1 id="wcf_lblPageHeading" class="lblpageHeader">Kisan Krishi Bazaar</h1>            
         </div><!-- /header -->
         <div role="main" class="ui-content">
             <h2 class="mc-text-center" id="wcf_lblPageContentHeading">Welcome!</h2>
@@ -43,13 +42,14 @@
             </div>
         </div><!-- /content -->
       <div data-role="footer" >
-          <small id="wcf_footerText">© Copyright 2016, Accenture Hackathon</small>
+          <small id="wcf_footerText" class="lblPagefooter">© Copyright 2016, Accenture Hackathon</small>
       </div>
     </div><!-- /page -->
-    <div data-role="page" id="page-signin">
+  
+  <div data-role="page" id="page-signin">
         <div data-role="header" data-theme="c" data-position="fixed">
             <a href="#page-index" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
-            <h1 id="sif_lblPageHeading">Kisan Krishi Bazaar</h1>
+            <h1 id="sif_lblPageHeading" class="lblpageHeader">Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
             <h3 id="sif_lblPageContentHeading">Sign In</h3>
@@ -61,8 +61,8 @@
                 <input type="checkbox" name="chck-rememberme" id="chck-rememberme">
                 <label for="chck-rememberme" id="sif_lblRememberMe">Remember me</label>
             </fieldset>
-            <a href="#dlg-invalid-credentials" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" id="sif_btnsubmit">Submit</a>
-            <p class="mc-top-margin-1-5"><a href="begin-password-reset.html" id="sif_lblCantAccessAccount">Can't access your account?</a></p>
+            <a href="#" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" id="sif_btnsubmit">Submit</a>
+            <p class="mc-top-margin-1-5"><!--a href="begin-password-reset.html" id="sif_lblCantAccessAccount">Can't access your account?</a--></p>
             <div data-role="popup" id="dlg-invalid-credentials" data-dismissible="false" style="max-width:400px;">
                 <div role="main" class="ui-content">
                     <h3 class="mc-text-danger">Login Failed</h3>
@@ -72,26 +72,27 @@
             </div>
         </div><!-- /content -->
         <div data-role="footer">
-                  <small id="sif_footerText">© Copyright 2016, Accenture Hackathon</small>
+                  <small id="sif_footerText" class="lblPagefooter">© Copyright 2016, Accenture Hackathon</small>
             </div>
     </div><!-- /page -->
-    <div data-role="page" id="page-signup">
+  
+  <div data-role="page" id="page-signup">
         <div class="bi-header" data-role="header" data-theme="c" data-position="fixed">
             <a href="#page-index" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
-            <h1 id="suf_lblPageHeading"></h1>
+            <h1 id="suf_lblPageHeading" class="lblpageHeader">Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
-            <h3 id="suf_lblPageContentHeading"></h3>
+            <h3 id="suf_lblPageContentHeading">Sign up</h3>
             <div id="ctn-err" class="bi-invisible"></div>
-            <label for="txt-first-name" id="suf_lblFirstname"></label>
+            <label for="txt-first-name" id="suf_lblFirstname">First name</label>
             <input type="text" name="txt-first-name" id="txt-first-name" value="">
-            <label for="txt-last-name" id="suf_lblLastname"></label>
+            <label for="txt-last-name" id="suf_lblLastname">Last name</label>
             <input type="text" name="txt-last-name" id="txt-last-name" value="">
-            <label for="txt-user-name" id="suf_lblUserName"></label>
+            <label for="txt-user-name" id="suf_lblUserName">User name</label>
             <input type="text" name="txt-user-name" id="txt-user-name" value="">
-            <label for="txt-password" id="suf_lblpassword"></label>
+            <label for="txt-password" id="suf_lblpassword">Password</label>
             <input type="password" name="txt-password" id="txt-password" value="">
-            <label for="txt-password-confirm" id="suf_lblConfirmPassword"></label>
+            <label for="txt-password-confirm" id="suf_lblConfirmPassword">Confirm Password</label>
             <input type="password" name="txt-password-confirm" id="txt-password-confirm" value="">
             <!--<a href="#dlg-sign-up-sent" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Submit</a>-->
             <button id="suf_btnSubmit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" ></button>
@@ -107,12 +108,13 @@
             </div>
         </div><!-- /content -->
 		  <div data-role="footer">
-                  <small id="suf_footerText">© Copyright 2016, Accenture Hackathon</small>
+                  <small id="suf_footerText" class="lblPagefooter">© Copyright 2016, Accenture Hackathon</small>
             </div>
     </div><!-- /page -->
-    <div data-role="page" id="page-signup-succeeded">
+    
+  <div data-role="page" id="page-signup-succeeded">
         <div data-role="header" data-theme="c">
-            <h1 id="susf_lblPageHeading">Kisan Krishi Bazaar</h1>
+            <h1 id="susf_lblPageHeading" class="lblpageHeader">Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
             <h2 class="mc-text-center" id="susf_lblPageContentHeading">Registration Succeeded</h2>
@@ -120,11 +122,11 @@
             <a href="#page-dashboard" class="ui-btn ui-btn-b ui-corner-all" id="susf_btnSubmit">Go to Dashboard</a>
         </div><!-- /content -->
          <div data-role="footer">
-                  <small id="susf_footerText">© Copyright 2016, Accenture Hackathon</small>
+                  <small id="susf_footerText" class="lblPagefooter">© Copyright 2016, Accenture Hackathon</small>
             </div>
     </div><!-- /page -->
     
-	<div data-role="page" id="page-dashboard">
+  <div data-role="page" id="page-dashboard">
          <div data-role="panel" id="mypanel" data-display="overlay" data-position="left">
                 <!-- panel content goes here -->
                <ul data-role="listview">
@@ -146,7 +148,7 @@
 				</div>
             </div><!-- /panel -->
         <div data-role="header" data-theme="c">
-            <h1>Kisan Krishi Bazaar</h1>
+            <h1 class="lblpageHeader">Kisan Krishi Bazaar</h1>
             <a href="#mypanel"  class="jqm-navmenu-link ui-nodisc-icon ui-alt-icon ui-btn-left ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Log out</a>
         </div><!-- /header -->
         <div role="main" class="ui-content" style="background:url('img/dashboard.jpg');min-height:inherit">
@@ -203,26 +205,24 @@
 		</div><!-- /content -->
 		
         <div data-role="footer">
-                  <small>© Copyright 2016, Accenture Hackathon</small>
+                  <small class="lblPagefooter">© Copyright 2016, Accenture Hackathon</small>
             </div>
     </div><!-- /page -->
-    <div data-role="page" id="page-uploadproducts">
+   
+  <div data-role="page" id="page-uploadproducts">
         <div data-role="header" data-theme="c" data-position="fixed">
             <a href="#page-dashboard" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
-            <h1>Kisan Krishi Bazaar</h1>
+            <h1 class="lblpageHeader">Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
 				<div id="product-ctn-err" class="bi-invisible"></div>
             	<label for="select-product">Product : <span>*</span></label>
-				<select name="select-product" id="select-product" data-native-menu="false">
-					<option value="" data-placeholder="true" data-estimated-value="0">select  product...</option>	
-					
+				<select name="select-product" id="select-product" data-native-menu="false">					
 				</select>
 				<label for="lbl-estimated-price">Estimated price: </label>
 				<input type="text" name="lbl-estimated-price" id="lbl-estimated-price" value="" placeholder="estimated price" readonly></input> 
 				<label for="select-quantity">Quantity : <span>*</span></label>
-				<select name="select-quantity" id="select-quantity" data-native-menu="false">
-					<option value="" data-placeholder="true">select  quantity...</option>					
+				<select name="select-quantity" id="select-quantity" data-native-menu="false">					
 				</select>
 				<label for="txt-quote-price">Quote price: </label>
 				<input type="number" name="txt-quote-price" id="txt-quote-price" value="" placeholder="Quote price"></input> 
@@ -241,22 +241,20 @@
             </div>
         </div><!-- /content -->
       <div data-role="footer">
-                  <small>© Copyright 2016, Accenture Hackathon</small>
+                  <small class="lblPagefooter">© Copyright 2016, Accenture Hackathon</small>
       </div>
     </div><!-- /page -->
     
-    
-	<div data-role="page" id="page-orderHistory">
+  <div data-role="page" id="page-orderHistory">
         <div data-role="header" data-theme="c" data-position="fixed">
             <a href="#page-dashboard" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
-            <h1>Kisan Krishi Bazaar</h1>
+            <h1 class="lblpageHeader">Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
 		  <h3>Order History</h3>
           <table data-role="table" id="orderHistoryTable" data-mode="reflow" class="movie-list">
 			  <thead>
 				<tr>
-				  <th>Id</th>
 				  <th data-priority="2">Submitted Date</th>
 				  <th data-priority="3">Product</th>
 				  <th data-priority="4">Estimated Price</th>
@@ -264,27 +262,7 @@
 				  <th data-priority="1">Status</th>				  
 				</tr>
 			  </thead>
-			  <tbody>
-				<tr>
-				  <th>1</th>
-				  <td>21-08-2018</td>
-				  <td class="title">test</td>
-				  <td>100</td>
-				  <td>74</td>
-				  <td>
-				   <input type="checkbox" data-role="flipswitch" name="flip-checkbox-1" id="flip-checkbox-1" data-on-text="In Progress" data-off-text="Complete" data-wrapper-class="custom-size-flipswitch">			  
-				  </td>
-				</tr>
-				<tr>
-				  <th>2</th>
-				  <td>21-08-2018</td>
-				  <td class="title">test</td>
-				  <td>100</td>
-				  <td>74</td>
-				  <td>
-				   <input type="checkbox" data-role="flipswitch" name="flip-checkbox-2" id="flip-checkbox-2" data-on-text="In Progress" data-off-text="Complete" data-wrapper-class="custom-size-flipswitch">			  	
-				  </td>
-				</tr>
+			  <tbody>							
 			  </tbody>
 			</table>
 			<div class="ui-grid-solo">
@@ -292,15 +270,14 @@
             </div>
         </div><!-- /content -->
       <div data-role="footer">
-                  <small>© Copyright 2016, Accenture Hackathon</small>
+                  <small class="lblPagefooter">© Copyright 2016, Accenture Hackathon</small>
       </div>
     </div><!-- /page -->
     
-    
-	<div data-role="page" id="page-negotiateHistory">
+  <div data-role="page" id="page-negotiateHistory">
         <div data-role="header" data-theme="c" data-position="fixed">
             <a href="#page-dashboard" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
-            <h1>Kisan Krishi Bazaar</h1>
+            <h1 class="lblpageHeader">Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
 		  <h3>Negotiate History</h3>
@@ -351,7 +328,7 @@
             </div>
         </div><!-- /content -->
       <div data-role="footer">
-                  <small>© Copyright 2016, Accenture Hackathon</small>
+                  <small class="lblPagefooter">© Copyright 2016, Accenture Hackathon</small>
       </div>
     </div><!-- /page -->
     

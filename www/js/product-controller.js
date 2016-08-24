@@ -21,9 +21,10 @@ BookIt.productController.prototype.init = function () {
 	this.$ctnErr = $("#product-ctn-err",this.$productUploadPage);
 	this.$dlguploadproductsubmitsuccess = $("#dlg-uploadproductsubmit-success",this.$productUploadPage);
 	
-	
 	var locCurrentLangType = localStorage.getItem("ngStorage-defLanguageType") == undefined ? "english" : localStorage.getItem("ngStorage-defLanguageType");
-	app.getCommodity(locCurrentLangType.toLowerCase()); // read from localStorage
+	app.getCommodity(locCurrentLangType.toLowerCase()); // read from localStorage	
+	
+	
 	    
 };
 
@@ -55,6 +56,8 @@ BookIt.productController.prototype.onProductSubmitCommand = function () {
     me.$selProduct.removeClass(invalidInputStyle);
 	me.$selQuantity.removeClass(invalidInputStyle);
 	me.$lblEstimatedPrice.removeClass(invalidInputStyle);
+	
+	var currentLanguage = localStorage.getItem("ngStorage-defLanguageType");
     // Flag each invalid field.
     if (quotePrice.length === 0) {
         me.$txtQuotePrice.addClass(invalidInputStyle);
@@ -70,14 +73,42 @@ BookIt.productController.prototype.onProductSubmitCommand = function () {
     }
 	
 	if(quotePrice < estimatedPrice){
-		me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.QuotepricelessthanEstimatedPrice +".</p>");
-        me.$ctnErr.addClass("bi-ctn-err").slideDown();
+		if(currentLanguage == "") {
+			me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.QuotepricelessthanEstimatedPrice +".</p>");
+		}else{
+			switch(currentLanguage.toLowerCase()){
+				case "hindi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.hindi.QuotepricelessthanEstimatedPrice +".</p>");
+				break;
+				case "marathi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.marathi.QuotepricelessthanEstimatedPrice +".</p>");
+				break;
+				default:
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.QuotepricelessthanEstimatedPrice +".</p>");
+				break;
+			}
+		}
+	    me.$ctnErr.addClass("bi-ctn-err").slideDown();
         return;
 	}
     // Make sure that all the required fields have values.
     if (invalidInput) {
-        me.$ctnErr.html("<p>" + BookIt.Settings.AppErrorMessage.english.requiredfield +".</p>");
-        me.$ctnErr.addClass("bi-ctn-err").slideDown();
+		if(currentLanguage == "") {
+			me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.productRequiredField +".</p>");
+		}else{
+			switch(currentLanguage.toLowerCase()){
+				case "hindi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.hindi.productRequiredField +".</p>");
+				break;
+				case "marathi" :
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.marathi.productRequiredField +".</p>");
+				break;
+				default:
+				me.$ctnErr.html("<p>"+ BookIt.Settings.AppErrorMessage.english.productRequiredField +".</p>");
+				break;
+			}
+		}
+		me.$ctnErr.addClass("bi-ctn-err").slideDown();
         return;
     }
     $("#dlg-uploadproductsubmit-success").popup('open');				
