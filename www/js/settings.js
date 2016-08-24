@@ -11,16 +11,30 @@ BookIt.Settings.AppErrorMessage.marathi = BookIt.Settings.AppErrorMessage.marath
 
 
 BookIt.Settings.sessionTimeoutInMSec = "30000";
-BookIt.Settings.signUpUrl = "http://192.168.1.104:30000/api/account/register"; 
-BookIt.Settings.signInUrl =  "http://10.216.240.36:4567/retailer/login"; 
-BookIt.Settings.validateUserNameUrl = "http://192.168.1.104:30000/api/account/register";
+//BookIt.Settings.signUpUrl = "http://10.216.240.36:8080/retailer/register"; 
+//BookIt.Settings.signInUrl =  "http://10.216.240.36:8080/farmer/login"; 
+//BookIt.Settings.validateUserNameUrl = "http://10.216.240.36:8080/farmer/Isvaliduser"; // ?username=
+//BookIt.Settings.getDefaultLanguage = "http://10.216.240.36:8080/farmer/translation"; //?Language=
+//BookIt.Settings.getCommodity = "http://10.216.240.36:8080/farmer/getCommodity"; // ?languageReq=english
+//BookIt.Settings.api.postProductDetail = "http://10.216.240.36:8080/farmer/orderInsert";//
+//BookIt.Settings.api.getOrderHistoryByUserName = "http://10.216.240.36:8080/farmer/getOrderHistory"; //?Language,username
 
-BookIt.Settings.getDefaultLanguage = "http://10.216.240.36:8080/farmer/translation"; //"/json/language.json";
-BookIt.Settings.getCommodity = "http://10.216.240.36:8080/farmer/getCommodity/";// "/json/commodity_hindi.json";
-BookIt.Settings.api.postProductDetail = "http://10.216.240.36:8080/orderInsert/";
-BookIt.Settings.api.getOrderHistoryByUserName = "http://10.216.240.36:8080/farmer/getOrderHistory/";
+//BookIt.Settings.signUpUrl = "http://10.216.241.192:8080/retailer/register"; 
+//BookIt.Settings.signInUrl =  "http://10.216.241.192:8080/farmer/login"; 
+//BookIt.Settings.validateUserNameUrl = "http://10.216.241.192:8080/farmer/Isvaliduser"; // ?username=
+//BookIt.Settings.getDefaultLanguage = "http://10.216.241.192:8080/farmer/translation"; //?Language=
+//BookIt.Settings.getCommodity = "http://10.216.241.192:8080/farmer/getCommodity"; // ?languageReq=english
+//BookIt.Settings.api.postProductDetail = "http://10.216.241.192:8080/farmer/orderInsert";//
+//BookIt.Settings.api.getOrderHistoryByUserName = "http://10.216.241.192:8080/farmer/getOrderHistory"; //?Language,username
 
 
+BookIt.Settings.signUpUrl = "http://52.76.193.103:8080/retailer/register"; 
+BookIt.Settings.signInUrl =  "http://52.76.193.103:8080/farmer/login"; 
+BookIt.Settings.validateUserNameUrl = "http://52.76.193.103:8080/farmer/Isvaliduser"; // ?username=
+BookIt.Settings.getDefaultLanguage = "http://52.76.193.103:8080/farmer/translation"; //?Language=
+BookIt.Settings.getCommodity = "http://52.76.193.103:8080/farmer/getCommodity"; // ?languageReq=english
+BookIt.Settings.api.postProductDetail = "http://52.76.193.103:8080/farmer/orderInsert";//
+BookIt.Settings.api.getOrderHistoryByUserName = "http://52.76.193.103:8080/farmer/getOrderHistory"; //?Language,username
 
 
 

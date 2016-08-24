@@ -130,18 +130,18 @@
          <div data-role="panel" id="mypanel" data-display="overlay" data-position="left">
                 <!-- panel content goes here -->
                <ul data-role="listview">
-					<li><a href="#dlg-logOut-popup" data-rel="popup" data-position-to="origin">Log Out</a></li>					
-					<li><a href="#page-orderHistory" data-rel="close" data-icon="arrow-r">My Account</a></li>
+					<li><a href="#dlg-logOut-popup" data-rel="popup" data-position-to="origin" id="lblLogOut">Log Out</a></li>					
+					<li><a href="#page-orderHistory" data-rel="close" data-icon="arrow-r" id="lblMyAccount">My Account</a></li>
 				</ul>
 				 <div data-role="popup" id="dlg-logOut-popup" data-dismissible="false">
 					<div role="main" class="ui-content" style="width:200px;">
-						<h3 class="mc-text-danger">Are you sure?</h3>
+						<h3 class="mc-text-danger lblPopupAreyouSureHeader" id="lblPopupAreyouSureHeader">Are you sure?</h3>
 						<fieldset class="ui-grid-a">
 						  <div class="ui-block-a">
-							<button id="btn-logout-yes" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" value=""  data-theme="a">Yes</button>
+							<button id="btn-logout-yes lblYesText" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" value=""  data-theme="a">Yes</button>
 						  </div>
 						  <div class="ui-block-b">	
-							<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">No</a>
+							<a href="#" data-rel="back" class="lblYesText ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">No</a>
                           </div>							
 						</fieldset>
 					</div>
@@ -152,8 +152,8 @@
             <a href="#mypanel"  class="jqm-navmenu-link ui-nodisc-icon ui-alt-icon ui-btn-left ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Log out</a>
         </div><!-- /header -->
         <div role="main" class="ui-content" style="background:url('img/dashboard.jpg');min-height:inherit">
-            <h2 class="mc-text-center">Dashboard</h2>
-            <div class="ui-grid-solo">
+            <h2 class="mc-text-center" id="lblDashboardPageContentHeader">Dashboard</h2>
+            <!--div class="ui-grid-solo">
                 <div class="ui-block-a">
                     <a href="#commodity-price" data-rel="popup" data-position-to="window" class="ui-shadow ui-btn ui-corner-all" data-transition="pop">market Price</a>
                     <div data-role="popup" id="commodity-price" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:300px;">
@@ -192,13 +192,13 @@
                 </div>
             </div><!-- /grid-c -->
             <div class="ui-grid-solo">
-                <div class="ui-block-a"><a href="#page-uploadproducts"  class="ui-shadow ui-btn ui-corner-all">Enter your Goods</a></div>
+                <div class="ui-block-a"><a href="#page-uploadproducts"  class="ui-shadow ui-btn ui-corner-all" id="lbldashboardEnterGoods">Enter your Goods</a></div>
             </div>
 			<div class="ui-grid-solo">
-                <div class="ui-block-a"> <a href="#page-orderHistory" class="ui-shadow ui-btn ui-corner-all">Order History</a></div>
+                <div class="ui-block-a"> <a href="#page-orderHistory" class="ui-shadow ui-btn ui-corner-all" id="lbldashboardOrderHistory">Order History</a></div>
             </div>
 			<div class="ui-grid-solo">
-                <div class="ui-block-a"><a href="#page-negotiateHistory" class="ui-shadow ui-btn ui-corner-all">Negotiate Price</a></div>
+                <div class="ui-block-a"><a href="#page-negotiateHistory" class="ui-shadow ui-btn ui-corner-all" id="lbldashboardNegotiatePrice">Negotiate Price</a></div>
             </div>
         
 		
@@ -215,28 +215,29 @@
             <h1 class="lblpageHeader">Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
+				<h3 id="pu_lblPageContentHeading">Upload product</h3>
 				<div id="product-ctn-err" class="bi-invisible"></div>
-            	<label for="select-product">Product : <span>*</span></label>
+            	<label for="select-product" id="pu_lblProduct">Product : <span>*</span></label>
 				<select name="select-product" id="select-product" data-native-menu="false">					
 				</select>
-				<label for="lbl-estimated-price">Estimated price: </label>
+				<label for="lbl-estimated-price" id="pu_lblEstimatePrice">Estimated price: </label>
 				<input type="text" name="lbl-estimated-price" id="lbl-estimated-price" value="" placeholder="estimated price" readonly></input> 
-				<label for="select-quantity">Quantity : <span>*</span></label>
+				<label for="select-quantity" id="pu_lblQuantity">Quantity : <span>*</span></label>
 				<select name="select-quantity" id="select-quantity" data-native-menu="false">					
 				</select>
-				<label for="txt-quote-price">Quote price: </label>
+				<label for="txt-quote-price" id="pu_lblQuoteprice">Quote price: </label>
 				<input type="number" name="txt-quote-price" id="txt-quote-price" value="" placeholder="Quote price"></input> 
 				<div class="ui-block-a">
-					<button id="btn-uploadproductsubmit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" value="" >Submit</button>
+					<button id="btn-uploadproductsubmit" class="lblbtnSubmit bui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" value="" >Submit</button>
 				</div>
 				<div class="ui-block-b">
-				<a href="#page-dashboard"  class="ui-shadow ui-btn ui-corner-all mc-top-margin-1-5">Close</a></div>
+				<a href="#page-dashboard"  class="lblbtnClose ui-shadow ui-btn ui-corner-all mc-top-margin-1-5">Close</a></div>
 				
 			<div data-role="popup" id="dlg-uploadproductsubmit-success" data-dismissible="false" style="max-width:400px;">
                 <div role="main" class="ui-content">
-                    <h3 class="mc-text-danger">Congratulations!</h3>
-                    <p>Product uploaded successfully!</p>
-                    <div class="mc-text-center"><a href="#page-dashboard" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+                    <h3 class="mc-text-danger lblCongratsHeading" >Congratulations!</h3>
+                    <p id="lblproductuploadSuccess">Product uploaded successfully!</p>
+                    <div class="mc-text-center"><a href="#page-dashboard" data-rel="back" class="lblbtnOk ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
                 </div>
             </div>
         </div><!-- /content -->
@@ -251,7 +252,7 @@
             <h1 class="lblpageHeader">Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
-		  <h3>Order History</h3>
+		  <h3 id="oh_lblPageContentHeading">Order History</h3>
           <table data-role="table" id="orderHistoryTable" data-mode="reflow" class="movie-list">
 			  <thead>
 				<tr>
@@ -266,7 +267,7 @@
 			  </tbody>
 			</table>
 			<div class="ui-grid-solo">
-                <div class="ui-block-a"><a href="#page-dashboard"  class="ui-shadow ui-btn ui-corner-all">Close</a></div>
+                <div class="ui-block-a"><a href="#page-dashboard"  class="lblbtnClose ui-shadow ui-btn ui-corner-all">Close</a></div>
             </div>
         </div><!-- /content -->
       <div data-role="footer">
@@ -280,7 +281,7 @@
             <h1 class="lblpageHeader">Kisan Krishi Bazaar</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
-		  <h3>Negotiate History</h3>
+		  <h3 id="nh_lblPageContentHeading">Negotiate History</h3>
           <table data-role="table" id="orderHistoryTable" data-mode="reflow" class="movie-list">
 			  <thead>
 				<tr>
@@ -324,14 +325,13 @@
 			  </tbody>
 			</table>
 			<div class="ui-grid-solo">
-                <div class="ui-block-a"><a href="#page-dashboard"  class="ui-shadow ui-btn ui-corner-all">Close</a></div>
+                <div class="ui-block-a"><a href="#page-dashboard"  class="lblbtnClose ui-shadow ui-btn ui-corner-all">Close</a></div>
             </div>
         </div><!-- /content -->
       <div data-role="footer">
                   <small class="lblPagefooter">© Copyright 2016, Accenture Hackathon</small>
       </div>
     </div><!-- /page -->
-    
     
     <script type="text/javascript" src="cordova.js"></script>
     <script src="lib/fastclick/fastclick.js"></script>

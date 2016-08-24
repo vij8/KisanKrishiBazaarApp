@@ -90,7 +90,7 @@ BookIt.SignInController.prototype.onSignInCommand = function () {
             $.mobile.loading("hide");
 			var locUsrDetails = $.parseJSON(resp);
 			if(locUsrDetails != ""){
-				localStorage.setItem("loggedInUser",locUsrDetails)
+				localStorage.setItem("loggedInUser",resp)
 			}
 		    if (locUsrDetails.username != "") {
                 // Create session. 

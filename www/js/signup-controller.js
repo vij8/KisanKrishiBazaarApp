@@ -186,12 +186,15 @@ BookIt.SignUpController.prototype.onSignUpCommand = function () {
         me.$txtPasswordConfirm.addClass(invalidInputStyle);
         return;
     }
-	$.mobile.navigate("#page-signup-succeeded");
-    return;
-    $.ajax({
+	
+	var address = "test";
+	var phoneNumber = "123456789";
+	var currentlongitude = "1.93";
+	var currentlatitute = "2.65";
+	$.ajax({
         type: 'POST',
         url: BookIt.Settings.signUpUrl,
-        data: "userName=" + userName + "&firstName=" + firstName + "&lastName=" + lastName + "&password=" + password + "&passwordConfirm=" + passwordConfirm + "&lat=" + currentlatitute + "&long=" + currentlongitude,
+        data: "username=" + userName + "&name=" + firstName  + lastName  + "&password=" + password + " &lat=" + currentlatitute + "&longt=" + currentlongitude + "&type=F" + "&address=" + address + "&phone=" + phoneNumber,
         success: function (resp) {
 
             if (resp.success === true) {
